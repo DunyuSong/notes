@@ -1,0 +1,471 @@
+"C:\Program Files\Java\jdk1.8.0_202\bin\java.exe" -XX:TieredStopAtLevel=1 -noverify -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\lib\idea_rt.jar=63962:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\lib\idea_rt.jar" com.intellij.rt.execution.CommandLineWrapper C:\Users\dd.shan\AppData\Local\Temp\idea_classpath316546062 io.metersphere.Application
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/D:/software/apache-maven-3.6.0/repo/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/D:/software/apache-maven-3.6.0/repo/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+14:07:41,001 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+14:07:41,001 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+14:07:41,002 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/D:/git/metersphere/metersphere/backend/target/classes/logback.xml]
+14:07:41,165 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+14:07:41,168 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [console]
+14:07:41,172 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:41,191 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:41,195 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [debugAppender]
+14:07:41,208 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1860250540 - No compression will be used
+14:07:41,209 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1860250540 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/debug.%d{yyyyMMdd}-%i.log for the active file
+14:07:41,211 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@5ea434c8 - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/debug.%d{yyyyMMdd}-%i.log'.
+14:07:41,211 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@5ea434c8 - Roll-over at midnight.
+14:07:41,211 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@5ea434c8 - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:41,212 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@5ea434c8 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:41,212 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@5ea434c8 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:41,213 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:41,215 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[debugAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/debug.log
+14:07:41,216 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[debugAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/debug.log]
+14:07:41,218 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:41,218 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [infoAppender]
+14:07:41,220 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@632587706 - No compression will be used
+14:07:41,220 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@632587706 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/info.%d{yyyyMMdd}-%i.log for the active file
+14:07:41,221 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2b546384 - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/info.%d{yyyyMMdd}-%i.log'.
+14:07:41,221 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2b546384 - Roll-over at midnight.
+14:07:41,222 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2b546384 - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:41,222 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2b546384 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:41,222 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2b546384 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:41,222 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:41,223 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[infoAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/info.log
+14:07:41,223 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[infoAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/info.log]
+14:07:41,224 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:41,224 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [errorAppender]
+14:07:41,226 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1567885839 - No compression will be used
+14:07:41,226 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1567885839 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/error.%d{yyyyMMdd}-%i.log for the active file
+14:07:41,227 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@214b199c - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/error.%d{yyyyMMdd}-%i.log'.
+14:07:41,227 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@214b199c - Roll-over at midnight.
+14:07:41,229 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@214b199c - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:41,229 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@214b199c - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:41,229 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@214b199c - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:41,230 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:41,230 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[errorAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/error.log
+14:07:41,231 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[errorAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/error.log]
+14:07:41,232 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:41,232 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [warnAppender]
+14:07:41,233 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@550752602 - No compression will be used
+14:07:41,234 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@550752602 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/warn.%d{yyyyMMdd}-%i.log for the active file
+14:07:41,235 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2893de87 - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/warn.%d{yyyyMMdd}-%i.log'.
+14:07:41,235 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2893de87 - Roll-over at midnight.
+14:07:41,235 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2893de87 - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:41,236 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2893de87 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:41,236 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@2893de87 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:41,236 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:41,237 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[warnAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/warn.log
+14:07:41,237 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[warnAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/warn.log]
+14:07:41,238 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:41,239 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [consoleAsyncAppender]
+14:07:41,240 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to ch.qos.logback.classic.AsyncAppender[consoleAsyncAppender]
+14:07:41,241 |-INFO in ch.qos.logback.classic.AsyncAppender[consoleAsyncAppender] - Attaching appender named [console] to AsyncAppender.
+14:07:41,241 |-INFO in ch.qos.logback.classic.AsyncAppender[consoleAsyncAppender] - Setting discardingThreshold to 2000
+14:07:41,242 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:41,242 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [debugAsyncAppender]
+14:07:41,242 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [debugAppender] to ch.qos.logback.classic.AsyncAppender[debugAsyncAppender]
+14:07:41,242 |-INFO in ch.qos.logback.classic.AsyncAppender[debugAsyncAppender] - Attaching appender named [debugAppender] to AsyncAppender.
+14:07:41,242 |-INFO in ch.qos.logback.classic.AsyncAppender[debugAsyncAppender] - Setting discardingThreshold to 2000
+14:07:41,242 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:41,243 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [infoAsyncAppender]
+14:07:41,243 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAppender] to ch.qos.logback.classic.AsyncAppender[infoAsyncAppender]
+14:07:41,243 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Attaching appender named [infoAppender] to AsyncAppender.
+14:07:41,243 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Setting discardingThreshold to 2000
+14:07:41,243 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:41,243 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [errorAsyncAppender]
+14:07:41,244 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [errorAppender] to ch.qos.logback.classic.AsyncAppender[errorAsyncAppender]
+14:07:41,244 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Attaching appender named [errorAppender] to AsyncAppender.
+14:07:41,244 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Setting discardingThreshold to 2000
+14:07:41,245 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:41,245 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [warnAsyncAppender]
+14:07:41,245 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [warnAppender] to ch.qos.logback.classic.AsyncAppender[warnAsyncAppender]
+14:07:41,245 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Attaching appender named [warnAppender] to AsyncAppender.
+14:07:41,246 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Setting discardingThreshold to 2000
+14:07:41,246 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+14:07:41,246 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAsyncAppender] to Logger[ROOT]
+14:07:41,246 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[ROOT]
+14:07:41,247 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [io.metersphere] to false
+14:07:41,249 |-INFO in ch.qos.logback.classic.joran.action.LevelAction - io.metersphere level set to DEBUG
+14:07:41,249 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAsyncAppender] to Logger[io.metersphere]
+14:07:41,249 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [warnAsyncAppender] to Logger[io.metersphere]
+14:07:41,249 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [errorAsyncAppender] to Logger[io.metersphere]
+14:07:41,249 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [io.metersphere.base.mapper] to DEBUG
+14:07:41,250 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[io.metersphere.base.mapper]
+14:07:41,250 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [io.metersphere.Application] to DEBUG
+14:07:41,250 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [io.metersphere.Application] to false
+14:07:41,250 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAsyncAppender] to Logger[io.metersphere.Application]
+14:07:41,250 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+14:07:41,251 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@1d548a08 - Registering current configuration as safe fallback point
+SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
+14:07:42,068 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Worker thread will flush remaining events before exiting. 
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Queue flush finished successfully within timeout.
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Worker thread will flush remaining events before exiting. 
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Queue flush finished successfully within timeout.
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Worker thread will flush remaining events before exiting. 
+14:07:42,070 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Queue flush finished successfully within timeout.
+14:07:42,068 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Worker thread will flush remaining events before exiting. 
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Queue flush finished successfully within timeout.
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Worker thread will flush remaining events before exiting. 
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Queue flush finished successfully within timeout.
+14:07:42,069 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Worker thread will flush remaining events before exiting. 
+14:07:42,070 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Queue flush finished successfully within timeout.
+14:07:42,080 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+14:07:42,081 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [console]
+14:07:42,081 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:42,082 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:42,082 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [debugAppender]
+14:07:42,083 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@807328355 - No compression will be used
+14:07:42,084 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@807328355 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/debug.%d{yyyyMMdd}-%i.log for the active file
+14:07:42,084 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@3d246ea3 - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/debug.%d{yyyyMMdd}-%i.log'.
+14:07:42,084 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@3d246ea3 - Roll-over at midnight.
+14:07:42,085 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@3d246ea3 - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:42,085 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@3d246ea3 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:42,085 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@3d246ea3 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:42,086 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:42,086 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[debugAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/debug.log
+14:07:42,086 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[debugAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/debug.log]
+14:07:42,087 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:42,087 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [infoAppender]
+14:07:42,088 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@873993427 - No compression will be used
+14:07:42,088 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@873993427 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/info.%d{yyyyMMdd}-%i.log for the active file
+14:07:42,089 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@4397ad89 - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/info.%d{yyyyMMdd}-%i.log'.
+14:07:42,089 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@4397ad89 - Roll-over at midnight.
+14:07:42,090 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@4397ad89 - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:42,090 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@4397ad89 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:42,090 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@4397ad89 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:42,090 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:42,091 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[infoAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/info.log
+14:07:42,091 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[infoAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/info.log]
+14:07:42,092 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:42,092 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [errorAppender]
+14:07:42,093 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@94157402 - No compression will be used
+14:07:42,093 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@94157402 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/error.%d{yyyyMMdd}-%i.log for the active file
+14:07:42,094 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@1bd39d3c - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/error.%d{yyyyMMdd}-%i.log'.
+14:07:42,094 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@1bd39d3c - Roll-over at midnight.
+14:07:42,095 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@1bd39d3c - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:42,095 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@1bd39d3c - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:42,095 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@1bd39d3c - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:42,095 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:42,096 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[errorAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/error.log
+14:07:42,096 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[errorAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/error.log]
+14:07:42,097 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+14:07:42,097 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [warnAppender]
+14:07:42,098 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1863953433 - No compression will be used
+14:07:42,098 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1863953433 - Will use the pattern c:/opt/metersphere/logs/metersphere/history/warn.%d{yyyyMMdd}-%i.log for the active file
+14:07:42,099 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@768fc0f2 - The date pattern is 'yyyyMMdd' from file name pattern 'c:/opt/metersphere/logs/metersphere/history/warn.%d{yyyyMMdd}-%i.log'.
+14:07:42,099 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@768fc0f2 - Roll-over at midnight.
+14:07:42,100 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@768fc0f2 - Setting initial period to Mon Dec 07 14:07:41 CST 2020
+14:07:42,100 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@768fc0f2 - SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead
+14:07:42,100 |-WARN in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@768fc0f2 - For more information see http://logback.qos.ch/manual/appenders.html#SizeAndTimeBasedRollingPolicy
+14:07:42,100 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+14:07:42,101 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[warnAppender] - Active log file name: c:/opt/metersphere/logs/metersphere/warn.log
+14:07:42,101 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[warnAppender] - File property is set to [c:/opt/metersphere/logs/metersphere/warn.log]
+14:07:42,102 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:42,102 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [consoleAsyncAppender]
+14:07:42,102 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to ch.qos.logback.classic.AsyncAppender[consoleAsyncAppender]
+14:07:42,102 |-INFO in ch.qos.logback.classic.AsyncAppender[consoleAsyncAppender] - Attaching appender named [console] to AsyncAppender.
+14:07:42,102 |-INFO in ch.qos.logback.classic.AsyncAppender[consoleAsyncAppender] - Setting discardingThreshold to 2000
+14:07:42,102 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:42,102 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [debugAsyncAppender]
+14:07:42,103 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [debugAppender] to ch.qos.logback.classic.AsyncAppender[debugAsyncAppender]
+14:07:42,103 |-INFO in ch.qos.logback.classic.AsyncAppender[debugAsyncAppender] - Attaching appender named [debugAppender] to AsyncAppender.
+14:07:42,103 |-INFO in ch.qos.logback.classic.AsyncAppender[debugAsyncAppender] - Setting discardingThreshold to 2000
+14:07:42,103 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:42,103 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [infoAsyncAppender]
+14:07:42,104 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAppender] to ch.qos.logback.classic.AsyncAppender[infoAsyncAppender]
+14:07:42,104 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Attaching appender named [infoAppender] to AsyncAppender.
+14:07:42,104 |-INFO in ch.qos.logback.classic.AsyncAppender[infoAsyncAppender] - Setting discardingThreshold to 2000
+14:07:42,104 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:42,104 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [errorAsyncAppender]
+14:07:42,104 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [errorAppender] to ch.qos.logback.classic.AsyncAppender[errorAsyncAppender]
+14:07:42,104 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Attaching appender named [errorAppender] to AsyncAppender.
+14:07:42,104 |-INFO in ch.qos.logback.classic.AsyncAppender[errorAsyncAppender] - Setting discardingThreshold to 2000
+14:07:42,104 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+14:07:42,104 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [warnAsyncAppender]
+14:07:42,105 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [warnAppender] to ch.qos.logback.classic.AsyncAppender[warnAsyncAppender]
+14:07:42,105 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Attaching appender named [warnAppender] to AsyncAppender.
+14:07:42,105 |-INFO in ch.qos.logback.classic.AsyncAppender[warnAsyncAppender] - Setting discardingThreshold to 2000
+14:07:42,105 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+14:07:42,105 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@20c0a64d - Propagating INFO level on Logger[ROOT] onto the JUL framework
+14:07:42,105 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAsyncAppender] to Logger[ROOT]
+14:07:42,105 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[ROOT]
+14:07:42,106 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [io.metersphere] to false
+14:07:42,106 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@20c0a64d - Propagating DEBUG level on Logger[io.metersphere] onto the JUL framework
+14:07:42,106 |-INFO in ch.qos.logback.classic.joran.action.LevelAction - io.metersphere level set to DEBUG
+14:07:42,106 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAsyncAppender] to Logger[io.metersphere]
+14:07:42,106 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [warnAsyncAppender] to Logger[io.metersphere]
+14:07:42,106 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [errorAsyncAppender] to Logger[io.metersphere]
+14:07:42,106 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [io.metersphere.base.mapper] to DEBUG
+14:07:42,106 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@20c0a64d - Propagating DEBUG level on Logger[io.metersphere.base.mapper] onto the JUL framework
+14:07:42,106 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [console] to Logger[io.metersphere.base.mapper]
+14:07:42,106 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [io.metersphere.Application] to DEBUG
+14:07:42,106 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@20c0a64d - Propagating DEBUG level on Logger[io.metersphere.Application] onto the JUL framework
+14:07:42,106 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [io.metersphere.Application] to false
+14:07:42,106 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [infoAsyncAppender] to Logger[io.metersphere.Application]
+14:07:42,106 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+14:07:42,106 |-INFO in org.springframework.boot.logging.logback.SpringBootJoranConfigurator@1115ec15 - Registering current configuration as safe fallback point
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.2.6.RELEASE)
+
+2020-12-07 14:07:44,235  INFO y.config.RepositoryConfigurationDelegate: 127 - Bootstrapping Spring Data LDAP repositories in DEFAULT mode.
+2020-12-07 14:07:44,378  INFO y.config.RepositoryConfigurationDelegate: 187 - Finished Spring Data repository scanning in 133ms. Found 0 LDAP repository interfaces.
+2020-12-07 14:07:44,809  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'shiroConfig' of type [io.metersphere.config.ShiroConfig$$EnhancerBySpringCGLIB$$5b37c9e4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:44,874  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'memoryConstrainedCacheManager' of type [org.apache.shiro.cache.MemoryConstrainedCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:44,886  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,194  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,281  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'getAuthorizationAttributeSourceAdvisor' of type [org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,332  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,343  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration' of type [org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,345  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'stringOrNumberMigrationVersionConverter' of type [org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$StringOrNumberToMigrationVersionConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,355  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,551  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'dataSource' of type [com.zaxxer.hikari.HikariDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,570  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,581  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'quartz-com.fit2cloud.autoconfigure.QuartzProperties' of type [com.fit2cloud.autoconfigure.QuartzProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,587  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'com.fit2cloud.autoconfigure.QuartzAutoConfiguration' of type [com.fit2cloud.autoconfigure.QuartzAutoConfiguration$$EnhancerBySpringCGLIB$$859fcccb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,655  INFO      org.quartz.impl.StdSchedulerFactory:1220 - Using default implementation for ThreadExecutor
+2020-12-07 14:07:45,657  INFO        org.quartz.simpl.SimpleThreadPool: 268 - Job execution threads will use class loader of thread: main
+2020-12-07 14:07:45,667  INFO    org.quartz.core.SchedulerSignalerImpl:  61 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2020-12-07 14:07:45,667  INFO          org.quartz.core.QuartzScheduler: 229 - Quartz Scheduler v.2.3.2 created.
+2020-12-07 14:07:45,683  INFO       com.zaxxer.hikari.HikariDataSource: 110 - DatebookHikariCP - Starting...
+2020-12-07 14:07:45,852  INFO       com.zaxxer.hikari.HikariDataSource: 123 - DatebookHikariCP - Start completed.
+2020-12-07 14:07:45,862  INFO cheduling.quartz.LocalDataSourceJobStore: 672 - Using db table-based data access locking (synchronization).
+2020-12-07 14:07:45,864  INFO cheduling.quartz.LocalDataSourceJobStore: 145 - JobStoreCMT initialized.
+2020-12-07 14:07:45,865  INFO          org.quartz.core.QuartzScheduler: 294 - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'clusterScheduler' with instanceId 'DESKTOP-U35I1607321265656'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2020-12-07 14:07:45,865  INFO      org.quartz.impl.StdSchedulerFactory:1374 - Quartz scheduler 'clusterScheduler' initialized from an externally provided properties instance.
+2020-12-07 14:07:45,865  INFO      org.quartz.impl.StdSchedulerFactory:1378 - Quartz scheduler version: 2.3.2
+2020-12-07 14:07:45,867  INFO          org.quartz.core.QuartzScheduler:2293 - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@feb098f
+2020-12-07 14:07:45,867  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'clusterSchedulerFactoryBean' of type [org.springframework.scheduling.quartz.SchedulerFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,880  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'clusterSchedulerFactoryBean' of type [org.quartz.impl.StdScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,889  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'quartzTimeZone' of type [sun.util.calendar.ZoneInfo] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,894  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'org.apache.shiro.spring.boot.autoconfigure.ShiroBeanAutoConfiguration' of type [org.apache.shiro.spring.boot.autoconfigure.ShiroBeanAutoConfiguration$$EnhancerBySpringCGLIB$$f5c9e468] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:45,898  INFO trationDelegate$BeanPostProcessorChecker: 330 - Bean 'eventBus' of type [org.apache.shiro.event.support.DefaultEventBus] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-07 14:07:46,112  INFO               org.eclipse.jetty.util.log: 169 - Logging initialized @6033ms to org.eclipse.jetty.util.log.Slf4jLog
+2020-12-07 14:07:46,256  INFO edded.jetty.JettyServletWebServerFactory: 145 - Server initialized with port: 8081
+2020-12-07 14:07:46,260  INFO          org.eclipse.jetty.server.Server: 359 - jetty-9.4.27.v20200227; built: 2020-02-27T18:37:21.340Z; git: a304fd9f351f337e7c0e2a7c28878dd536149c6c; jvm 1.8.0_202-b08
+2020-12-07 14:07:46,286  INFO erver.handler.ContextHandler.application:2226 - Initializing Spring embedded WebApplicationContext
+2020-12-07 14:07:46,287  INFO pringframework.web.context.ContextLoader: 284 - Root WebApplicationContext: initialization completed in 3757 ms
+2020-12-07 14:07:46,561  INFO         org.eclipse.jetty.server.session: 334 - DefaultSessionIdManager workerName=node0
+2020-12-07 14:07:46,561  INFO         org.eclipse.jetty.server.session: 339 - No SessionScavenger set, using defaults
+2020-12-07 14:07:46,562  INFO         org.eclipse.jetty.server.session: 140 - node0 Scavenging every 660000ms
+2020-12-07 14:07:46,570  INFO ipse.jetty.server.handler.ContextHandler: 828 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@55361f03{application,/,[file:///C:/Users/dd.shan/AppData/Local/Temp/jetty-docbase.1867510738030288906.8081/, jar:file:/D:/software/apache-maven-3.6.0/repo/org/webjars/swagger-ui/3.25.0/swagger-ui-3.25.0.jar!/META-INF/resources, jar:file:/D:/software/apache-maven-3.6.0/repo/org/webjars/npm/angular__http/2.4.10/angular__http-2.4.10.jar!/META-INF/resources],AVAILABLE}
+2020-12-07 14:07:46,570  INFO          org.eclipse.jetty.server.Server: 399 - Started @6491ms
+2020-12-07 14:07:47,598  INFO       org.apache.jmeter.util.JMeterUtils: 365 - Setting Locale to zh_CN
+2020-12-07 14:07:49,724  INFO duling.concurrent.ThreadPoolTaskExecutor: 181 - Initializing ExecutorService 'taskExecutor'
+2020-12-07 14:07:52,349  INFO ydb.core.internal.license.VersionPrinter:  49 - Flyway Community Edition 6.0.8 by Redgate
+2020-12-07 14:07:52,390  INFO b.core.internal.database.DatabaseFactory:  49 - Database: jdbc:mysql://192.168.163.43:3306/metersphere_dev (MySQL 5.7)
+2020-12-07 14:07:52,448  INFO nal.schemahistory.JdbcTableSchemaHistory:  49 - Creating Schema History table `metersphere_dev`.`metersphere_version` ...
+2020-12-07 14:07:52,785  INFO flywaydb.core.internal.command.DbMigrate:  49 - Current version of schema `metersphere_dev`: << Empty Schema >>
+2020-12-07 14:07:52,792  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 1 - init
+2020-12-07 14:07:52,794  INFO ernal.sqlscript.DefaultSqlScriptExecutor:  49 - +-----------------+
+| database()      |
++-----------------+
+| metersphere_dev |
++-----------------+
+
+2020-12-07 14:07:52,830  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 2 - metersphere ddl
+2020-12-07 14:07:56,629  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 3 - init data
+2020-12-07 14:07:56,673  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 4 - user key
+2020-12-07 14:07:56,878  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 5 - schedule
+2020-12-07 14:08:00,023  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 6 - api test environment
+2020-12-07 14:08:00,250  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 7 - modify user table
+2020-12-07 14:08:00,507  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 8 - modify test case
+2020-12-07 14:08:00,650  WARN ernal.sqlscript.DefaultSqlScriptExecutor:  53 - DB: PROCEDURE metersphere_dev.test_cursor does not exist (SQL State: 42000 - Error Code: 1305)
+2020-12-07 14:08:00,675  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 9 - modify report result
+2020-12-07 14:08:01,019  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 10 - modify schedule
+2020-12-07 14:08:01,635  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 11 - add test case
+2020-12-07 14:08:01,880  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 12 - modify load test report
+2020-12-07 14:08:02,141  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 13 - service integration
+2020-12-07 14:08:02,683  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 14 - modify project
+2020-12-07 14:08:03,016  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 15 - add quota
+2020-12-07 14:08:03,207  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 16 - modify test case path
+2020-12-07 14:08:03,433  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 17 - test plan project
+2020-12-07 14:08:03,620  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 18 - notice
+2020-12-07 14:08:03,799  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 19 - add api test environment
+2020-12-07 14:08:04,023  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 20 - add license
+2020-12-07 14:08:04,203  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 21 - modify test plan
+2020-12-07 14:08:04,352  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 22 - modify api test environment
+2020-12-07 14:08:04,960  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 23 - test case review
+2020-12-07 14:08:05,947  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 24 - modify test plan
+2020-12-07 14:08:06,895  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 25 - add base system properties
+2020-12-07 14:08:06,917  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 26 - modify notice
+2020-12-07 14:08:07,742  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 27 - refactor notice
+2020-12-07 14:08:08,022  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 28 - modify test case
+2020-12-07 14:08:08,206  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 29 - test case matainer
+2020-12-07 14:08:08,278  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 30 - test case file
+2020-12-07 14:08:08,477  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 31 - message task
+2020-12-07 14:08:08,665  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 32 - test case prerequisite
+2020-12-07 14:08:08,752  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 33 - modify message task
+2020-12-07 14:08:09,081  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 34 - api test jar
+2020-12-07 14:08:09,238  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 35 - modify test plan
+2020-12-07 14:08:09,441  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 36 - add messag task
+2020-12-07 14:08:09,741  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 37 - add plan index
+2020-12-07 14:08:09,946  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 38 - modify message task test id
+2020-12-07 14:08:10,128  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 39 - modify message task create time
+2020-12-07 14:08:10,363  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 40 - test case node add pos
+2020-12-07 14:08:10,554  WARN ernal.sqlscript.DefaultSqlScriptExecutor:  53 - DB: PROCEDURE metersphere_dev.pos_cursor does not exist (SQL State: 42000 - Error Code: 1305)
+2020-12-07 14:08:10,588  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 41 - set ui
+2020-12-07 14:08:10,611  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 42 - modify load test report
+2020-12-07 14:08:10,820  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 43 - add role
+2020-12-07 14:08:10,835  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 44 - project add zentao id
+2020-12-07 14:08:11,122  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 45 - modify issues
+2020-12-07 14:08:11,680  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 46 - api definition
+2020-12-07 14:08:13,019  INFO flywaydb.core.internal.command.DbMigrate:  49 - Migrating schema `metersphere_dev` to version 47 - api data view
+2020-12-07 14:08:13,165  INFO flywaydb.core.internal.command.DbMigrate:  49 - Successfully applied 47 migrations to schema `metersphere_dev` (execution time 00:20.457s)
+2020-12-07 14:08:13,767  WARN e.freemarker.FreeMarkerAutoConfiguration:  67 - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2020-12-07 14:08:14,005  INFO uling.concurrent.ThreadPoolTaskScheduler: 181 - Initializing ExecutorService 'taskScheduler'
+2020-12-07 14:08:14,259  INFO k.scheduling.quartz.SchedulerFactoryBean: 732 - Will start Quartz Scheduler [clusterScheduler] in 60 seconds
+2020-12-07 14:08:14,300  INFO erver.handler.ContextHandler.application:2226 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-07 14:08:14,300  INFO gframework.web.servlet.DispatcherServlet: 525 - Initializing Servlet 'dispatcherServlet'
+2020-12-07 14:08:14,309  INFO gframework.web.servlet.DispatcherServlet: 547 - Completed initialization in 9 ms
+2020-12-07 14:08:14,334  INFO g.eclipse.jetty.server.AbstractConnector: 331 - Started ServerConnector@4017fe2c{HTTP/1.1, (http/1.1)}{0.0.0.0:8081}
+2020-12-07 14:08:14,336  INFO k.boot.web.embedded.jetty.JettyWebServer: 157 - Jetty started on port(s) 8081 (http/1.1) with context path '/'
+2020-12-07 14:08:14,503  INFO edded.jetty.JettyServletWebServerFactory: 145 - Server initialized with port: 8083
+2020-12-07 14:08:14,503  INFO          org.eclipse.jetty.server.Server: 359 - jetty-9.4.27.v20200227; built: 2020-02-27T18:37:21.340Z; git: a304fd9f351f337e7c0e2a7c28878dd536149c6c; jvm 1.8.0_202-b08
+2020-12-07 14:08:14,505  INFO erver.handler.ContextHandler.application:2226 - Initializing Spring embedded WebApplicationContext
+2020-12-07 14:08:14,506  INFO pringframework.web.context.ContextLoader: 284 - Root WebApplicationContext: initialization completed in 166 ms
+2020-12-07 14:08:14,510  INFO         org.eclipse.jetty.server.session: 334 - DefaultSessionIdManager workerName=node0
+2020-12-07 14:08:14,510  INFO         org.eclipse.jetty.server.session: 339 - No SessionScavenger set, using defaults
+2020-12-07 14:08:14,511  INFO         org.eclipse.jetty.server.session: 140 - node0 Scavenging every 600000ms
+2020-12-07 14:08:14,511  INFO ipse.jetty.server.handler.ContextHandler: 828 - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@17e66aed{application,/,[file:///C:/Users/dd.shan/AppData/Local/Temp/jetty-docbase.2312675915961002000.8083/, jar:file:/D:/software/apache-maven-3.6.0/repo/org/webjars/swagger-ui/3.25.0/swagger-ui-3.25.0.jar!/META-INF/resources, jar:file:/D:/software/apache-maven-3.6.0/repo/org/webjars/npm/angular__http/2.4.10/angular__http-2.4.10.jar!/META-INF/resources],AVAILABLE}
+2020-12-07 14:08:14,511  INFO          org.eclipse.jetty.server.Server: 399 - Started @34432ms
+2020-12-07 14:08:14,520  INFO tuate.endpoint.web.EndpointLinksResolver:  58 - Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-12-07 14:08:15,439  INFO erver.handler.ContextHandler.application:2226 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-07 14:08:15,439  INFO gframework.web.servlet.DispatcherServlet: 525 - Initializing Servlet 'dispatcherServlet'
+2020-12-07 14:08:15,440  INFO gframework.web.servlet.DispatcherServlet: 547 - Completed initialization in 1 ms
+2020-12-07 14:08:15,444  INFO g.eclipse.jetty.server.AbstractConnector: 331 - Started ServerConnector@4379fe2a{HTTP/1.1, (http/1.1)}{0.0.0.0:8083}
+2020-12-07 14:08:15,444  INFO k.boot.web.embedded.jetty.JettyWebServer: 157 - Jetty started on port(s) 8083 (http/1.1) with context path '/'
+================= 应用启动 =================
+2020-12-07 14:08:15,496 DEBUG e.mapper.JarConfigMapper.selectByExample: 143 - ==>  Preparing: select id, `name`, file_name, creator, modifier, `path`, `enable`, description, create_time, update_time from jar_config 
+2020-12-07 14:08:15,508 DEBUG e.mapper.JarConfigMapper.selectByExample: 143 - ==> Parameters: 
+2020-12-07 14:08:15,520 DEBUG e.mapper.JarConfigMapper.selectByExample: 143 - <==      Total: 0
+sys.path: /D:/git/metersphere/metersphere/backend/target/classes/jmeter
+2020-12-07 14:09:14,259  INFO k.scheduling.quartz.SchedulerFactoryBean: 748 - Starting Quartz Scheduler now, after delay of 60 seconds
+2020-12-07 14:09:14,271  INFO          org.quartz.core.QuartzScheduler: 547 - Scheduler clusterScheduler_$_DESKTOP-U35I1607321265656 started.
+2020-12-07 14:09:14,278  INFO          org.quartz.core.QuartzScheduler: 547 - Scheduler clusterScheduler_$_DESKTOP-U35I1607321265656 started.
+2020-12-07 14:09:15,440  INFO          org.quartz.core.QuartzScheduler: 547 - Scheduler clusterScheduler_$_DESKTOP-U35I1607321265656 started.
+2020-12-07 14:11:16,135 DEBUG se.mapper.ScheduleMapper.selectByExample: 143 - ==>  Preparing: select id, `key`, `type`, `value`, `group`, job, `enable`, resource_id, user_id, workspace_id, create_time, update_time from schedule WHERE ( `enable` = ? ) 
+2020-12-07 14:11:16,135 DEBUG se.mapper.ScheduleMapper.selectByExample: 143 - ==> Parameters: true(Boolean)
+2020-12-07 14:11:16,138 DEBUG se.mapper.ScheduleMapper.selectByExample: 143 - <==      Total: 0
+2020-12-07 14:11:46,187  INFO ion.mgt.AbstractValidatingSessionManager: 233 - Enabling session validation scheduler...
+2020-12-07 14:11:47,142 DEBUG SystemParameterMapper.selectByPrimaryKey: 143 - ==>  Preparing: select param_key, param_value, type, sort from system_parameter where param_key = ? 
+2020-12-07 14:11:47,143 DEBUG SystemParameterMapper.selectByPrimaryKey: 143 - ==> Parameters: ldap.open(String)
+2020-12-07 14:11:47,145 DEBUG SystemParameterMapper.selectByPrimaryKey: 143 - <==      Total: 0
+2020-12-07 14:12:07,187 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==>  Preparing: select id, `name`, email, `password`, `status`, create_time, update_time, `language`, last_workspace_id, last_organization_id, phone, `source` from user where id = ? 
+2020-12-07 14:12:07,187 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:07,190 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - <==      Total: 1
+2020-12-07 14:12:07,226 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==>  Preparing: select id, user_id, role_id, source_id, create_time, update_time from user_role WHERE ( user_id = ? ) 
+2020-12-07 14:12:07,226 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:07,229 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:07,235 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==>  Preparing: select id, name, description, type, create_time, update_time from role WHERE ( id in ( ? , ? , ? ) ) 
+2020-12-07 14:12:07,236 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==> Parameters: admin(String), org_admin(String), test_manager(String)
+2020-12-07 14:12:07,238 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:07,248 DEBUG apper.WorkspaceMapper.selectByPrimaryKey: 143 - ==>  Preparing: select id, organization_id, name, description, create_time, update_time from workspace where id = ? 
+2020-12-07 14:12:07,248 DEBUG apper.WorkspaceMapper.selectByPrimaryKey: 143 - ==> Parameters: 8c8f13c0-3852-11eb-a44c-005056b431aa(String)
+2020-12-07 14:12:07,250 DEBUG apper.WorkspaceMapper.selectByPrimaryKey: 143 - <==      Total: 1
+2020-12-07 14:12:07,252 DEBUG r.UserMapper.updateByPrimaryKeySelective: 143 - ==>  Preparing: update user SET `name` = ?, email = ?, `status` = ?, create_time = ?, update_time = ?, last_workspace_id = ?, last_organization_id = ?, `source` = ? where id = ? 
+2020-12-07 14:12:07,253 DEBUG r.UserMapper.updateByPrimaryKeySelective: 143 - ==> Parameters: Administrator(String), admin@metersphere.io(String), 1(String), 1607321276000(Long), 1607321276000(Long), 8c8f13c0-3852-11eb-a44c-005056b431aa(String), 8c8ecd5b-3852-11eb-a44c-005056b431aa(String), LOCAL(String), admin(String)
+2020-12-07 14:12:07,255 DEBUG r.UserMapper.updateByPrimaryKeySelective: 143 - <==    Updates: 1
+2020-12-07 14:12:07,275 DEBUG per.ext.ExtUserMapper.getDefaultLanguage: 143 - ==>  Preparing: select param_value from system_parameter where param_key=? 
+2020-12-07 14:12:07,276 DEBUG per.ext.ExtUserMapper.getDefaultLanguage: 143 - ==> Parameters: default.language(String)
+2020-12-07 14:12:07,278 DEBUG per.ext.ExtUserMapper.getDefaultLanguage: 143 - <==      Total: 1
+2020-12-07 14:12:08,400 DEBUG xt.ExtUserRoleMapper.getUserRoleHelpList: 143 - ==>  Preparing: SELECT user_role.role_id AS roleId, role.`name` AS roleName, user_role.source_id AS sourceId, IF(workspace.id IS NULL,IF(organization.id IS NULL,'',organization.`name`),workspace.name) AS sourceName, IF(workspace.id IS NULL,NULL,workspace.organization_id) AS parentId FROM user_role LEFT JOIN role ON role.id = user_role.role_id LEFT JOIN workspace ON workspace.id = user_role.source_id LEFT JOIN organization ON organization.id = user_role.source_id WHERE user_role.user_id = ? 
+2020-12-07 14:12:08,401 DEBUG xt.ExtUserRoleMapper.getUserRoleHelpList: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:08,404 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==>  Preparing: select id, `name`, email, `password`, `status`, create_time, update_time, `language`, last_workspace_id, last_organization_id, phone, `source` from user where id = ? 
+2020-12-07 14:12:08,405 DEBUG xt.ExtUserRoleMapper.getUserRoleHelpList: 143 - <==      Total: 3
+2020-12-07 14:12:08,405 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:08,407 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - <==      Total: 1
+2020-12-07 14:12:08,408 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==>  Preparing: select id, user_id, role_id, source_id, create_time, update_time from user_role WHERE ( user_id = ? ) 
+2020-12-07 14:12:08,408 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:08,410 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:08,410 DEBUG e.mapper.WorkspaceMapper.selectByExample: 143 - ==>  Preparing: select id, organization_id, name, description, create_time, update_time from workspace WHERE ( organization_id = ? ) 
+2020-12-07 14:12:08,411 DEBUG e.mapper.WorkspaceMapper.selectByExample: 143 - ==> Parameters: 8c8ecd5b-3852-11eb-a44c-005056b431aa(String)
+2020-12-07 14:12:08,411 DEBUG apper.OrganizationMapper.selectByExample: 143 - ==>  Preparing: select id, name, description, create_time, update_time from organization WHERE ( id in ( ? , ? , ? , ? ) ) 
+2020-12-07 14:12:08,411 DEBUG apper.OrganizationMapper.selectByExample: 143 - ==> Parameters: 1(String), 8c8ecd5b-3852-11eb-a44c-005056b431aa(String), 8c8ecd5b-3852-11eb-a44c-005056b431aa(String), no_such_id(String)
+2020-12-07 14:12:08,411 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==>  Preparing: select id, name, description, type, create_time, update_time from role WHERE ( id in ( ? , ? , ? ) ) 
+2020-12-07 14:12:08,412 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==> Parameters: admin(String), org_admin(String), test_manager(String)
+2020-12-07 14:12:08,413 DEBUG apper.OrganizationMapper.selectByExample: 143 - <==      Total: 1
+2020-12-07 14:12:08,413 DEBUG e.mapper.WorkspaceMapper.selectByExample: 143 - <==      Total: 1
+2020-12-07 14:12:08,415 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:08,415 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==>  Preparing: select id, user_id, role_id, source_id, create_time, update_time from user_role WHERE ( user_id = ? ) 
+2020-12-07 14:12:08,416 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:08,421 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:08,557 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==>  Preparing: select id, `name`, email, `password`, `status`, create_time, update_time, `language`, last_workspace_id, last_organization_id, phone, `source` from user where id = ? 
+2020-12-07 14:12:08,558 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:08,561 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - <==      Total: 1
+2020-12-07 14:12:08,564 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==>  Preparing: select id, user_id, role_id, source_id, create_time, update_time from user_role WHERE ( user_id = ? ) 
+2020-12-07 14:12:08,564 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:08,566 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:08,568 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==>  Preparing: select id, name, description, type, create_time, update_time from role WHERE ( id in ( ? , ? , ? ) ) 
+2020-12-07 14:12:08,569 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==> Parameters: admin(String), org_admin(String), test_manager(String)
+2020-12-07 14:12:08,570 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:15,441 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==>  Preparing: select id, name, description, type, create_time, update_time from role 
+2020-12-07 14:12:15,442 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==> Parameters: 
+2020-12-07 14:12:15,444 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==>  Preparing: select id, `name`, email, `password`, `status`, create_time, update_time, `language`, last_workspace_id, last_organization_id, phone, `source` from user where id = ? 
+2020-12-07 14:12:15,444 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - <==      Total: 6
+2020-12-07 14:12:15,444 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:15,447 DEBUG ase.mapper.UserMapper.selectByPrimaryKey: 143 - <==      Total: 1
+2020-12-07 14:12:15,449 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==>  Preparing: select id, user_id, role_id, source_id, create_time, update_time from user_role WHERE ( user_id = ? ) 
+2020-12-07 14:12:15,450 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:15,451 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:15,453 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==>  Preparing: select id, name, description, type, create_time, update_time from role WHERE ( id in ( ? , ? , ? ) ) 
+2020-12-07 14:12:15,454 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==> Parameters: admin(String), org_admin(String), test_manager(String)
+2020-12-07 14:12:15,456 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:15,504 DEBUG pper.ext.ExtUserMapper.getUserList_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM `user` u 
+2020-12-07 14:12:15,504 DEBUG pper.ext.ExtUserMapper.getUserList_COUNT: 143 - ==> Parameters: 
+2020-12-07 14:12:15,506 DEBUG pper.ext.ExtUserMapper.getUserList_COUNT: 143 - <==      Total: 1
+2020-12-07 14:12:15,507 DEBUG ase.mapper.ext.ExtUserMapper.getUserList: 143 - ==>  Preparing: select u.id, u.name, u.email, u.phone, u.language, u.status, u.source, u.last_organization_id, u.last_workspace_id, u.language, u.create_time, u.update_time from `user` u order by u.update_time desc LIMIT 5 
+2020-12-07 14:12:15,507 DEBUG ase.mapper.ext.ExtUserMapper.getUserList: 143 - ==> Parameters: 
+2020-12-07 14:12:15,509 DEBUG ase.mapper.ext.ExtUserMapper.getUserList: 143 - <==      Total: 1
+2020-12-07 14:12:15,546 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==>  Preparing: select id, user_id, role_id, source_id, create_time, update_time from user_role WHERE ( user_id = ? ) 
+2020-12-07 14:12:15,547 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - ==> Parameters: admin(String)
+2020-12-07 14:12:15,549 DEBUG se.mapper.UserRoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:15,550 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==>  Preparing: select id, name, description, type, create_time, update_time from role WHERE ( id in ( ? , ? , ? ) ) 
+2020-12-07 14:12:15,551 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - ==> Parameters: admin(String), org_admin(String), test_manager(String)
+2020-12-07 14:12:15,552 DEBUG e.base.mapper.RoleMapper.selectByExample: 143 - <==      Total: 3
+2020-12-07 14:12:16,564 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM api_test LEFT JOIN project ON api_test.project_id = project.id LEFT JOIN user ON api_test.user_id = user.id WHERE project.workspace_id = ? AND api_test.user_id = ? 
+2020-12-07 14:12:16,565 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - ==> Parameters: 8c8f13c0-3852-11eb-a44c-005056b431aa(String), admin(String)
+2020-12-07 14:12:16,567 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - <==      Total: 1
+2020-12-07 14:12:16,587 DEBUG ApiTestReportMapper.selectDashboardTests: 143 - ==>  Preparing: SELECT min(create_time) AS date, count(api_test_report.id) AS count, date_format(from_unixtime(create_time / 1000), '%Y-%m-%d') AS x FROM api_test_report WHERE test_id IN (SELECT api_test.id FROM api_test JOIN project ON api_test.project_id = project.id WHERE workspace_id = ?) AND create_time > ? GROUP BY x 
+2020-12-07 14:12:16,588 DEBUG ApiTestReportMapper.selectDashboardTests: 143 - ==> Parameters: 8c8f13c0-3852-11eb-a44c-005056b431aa(String), 1575785536585(Long)
+2020-12-07 14:12:16,591 DEBUG ApiTestReportMapper.selectDashboardTests: 143 - <==      Total: 0
+2020-12-07 14:12:16,600 DEBUG e.base.mapper.ext.ExtScheduleMapper.list: 143 - ==>  Preparing: select schedule.* from schedule WHERE schedule.group = ? and schedule.workspace_id = ? and schedule.enable = ? order by update_time desc 
+2020-12-07 14:12:16,600 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM api_test LEFT JOIN project ON api_test.project_id = project.id LEFT JOIN user ON api_test.user_id = user.id WHERE project.workspace_id = ? AND api_test.user_id = ? 
+2020-12-07 14:12:16,600 DEBUG e.base.mapper.ext.ExtScheduleMapper.list: 143 - ==>  Preparing: select schedule.* from schedule WHERE schedule.group = ? and schedule.workspace_id = ? and schedule.enable = ? order by update_time desc 
+2020-12-07 14:12:16,601 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - ==> Parameters: 8c8f13c0-3852-11eb-a44c-005056b431aa(String), admin(String)
+2020-12-07 14:12:16,601 DEBUG e.base.mapper.ext.ExtScheduleMapper.list: 143 - ==> Parameters: API_TEST(String), 8c8f13c0-3852-11eb-a44c-005056b431aa(String), true(Boolean)
+2020-12-07 14:12:16,601 DEBUG e.base.mapper.ext.ExtScheduleMapper.list: 143 - ==> Parameters: API_TEST(String), 8c8f13c0-3852-11eb-a44c-005056b431aa(String), true(Boolean)
+2020-12-07 14:12:16,601 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM api_test_report r JOIN api_test t ON r.test_id = t.id LEFT JOIN project ON project.id = t.project_id LEFT JOIN user ON user.id = r.user_id WHERE r.user_id = ? AND project.workspace_id = ? AND r.status != 'Debug' 
+2020-12-07 14:12:16,602 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - ==> Parameters: admin(String), 8c8f13c0-3852-11eb-a44c-005056b431aa(String)
+2020-12-07 14:12:16,602 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - <==      Total: 1
+2020-12-07 14:12:16,603 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - <==      Total: 1
+2020-12-07 14:12:16,605 DEBUG pper.ProjectMapper.selectByExample_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM project WHERE (workspace_id = ?) 
+2020-12-07 14:12:16,605 DEBUG pper.ProjectMapper.selectByExample_COUNT: 143 - ==> Parameters: 8c8f13c0-3852-11eb-a44c-005056b431aa(String)
+2020-12-07 14:12:16,606 DEBUG e.base.mapper.ext.ExtScheduleMapper.list: 143 - <==      Total: 0
+2020-12-07 14:12:16,606 DEBUG ApiTestReportMapper.selectDashboardTests: 143 - ==>  Preparing: SELECT min(create_time) AS date, count(api_test_report.id) AS count, date_format(from_unixtime(create_time / 1000), '%Y-%m-%d') AS x FROM api_test_report WHERE test_id IN (SELECT api_test.id FROM api_test JOIN project ON api_test.project_id = project.id WHERE workspace_id = ?) AND create_time > ? GROUP BY x 
+2020-12-07 14:12:16,607 DEBUG ApiTestReportMapper.selectDashboardTests: 143 - ==> Parameters: 8c8f13c0-3852-11eb-a44c-005056b431aa(String), 1575785536606(Long)
+2020-12-07 14:12:16,613 DEBUG pper.ProjectMapper.selectByExample_COUNT: 143 - <==      Total: 1
+2020-12-07 14:12:16,613 DEBUG ApiTestReportMapper.selectDashboardTests: 143 - <==      Total: 0
+2020-12-07 14:12:16,614 DEBUG e.base.mapper.ext.ExtScheduleMapper.list: 143 - <==      Total: 0
+2020-12-07 14:12:16,635 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM api_test LEFT JOIN project ON api_test.project_id = project.id LEFT JOIN user ON api_test.user_id = user.id WHERE project.workspace_id = ? AND api_test.user_id = ? 
+2020-12-07 14:12:16,636 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - ==> Parameters: 8c8f13c0-3852-11eb-a44c-005056b431aa(String), admin(String)
+2020-12-07 14:12:16,637 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM api_test_report r JOIN api_test t ON r.test_id = t.id LEFT JOIN project ON project.id = t.project_id LEFT JOIN user ON user.id = r.user_id WHERE r.user_id = ? AND project.workspace_id = ? AND r.status != 'Debug' 
+2020-12-07 14:12:16,638 DEBUG e.mapper.ext.ExtApiTestMapper.list_COUNT: 143 - <==      Total: 1
+2020-12-07 14:12:16,638 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - ==> Parameters: admin(String), 8c8f13c0-3852-11eb-a44c-005056b431aa(String)
+2020-12-07 14:12:16,639 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - <==      Total: 1
+2020-12-07 14:12:16,659 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - ==>  Preparing: SELECT count(0) FROM api_test_report r JOIN api_test t ON r.test_id = t.id LEFT JOIN project ON project.id = t.project_id LEFT JOIN user ON user.id = r.user_id WHERE r.user_id = ? AND project.workspace_id = ? AND r.status != 'Debug' 
+2020-12-07 14:12:16,659 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - ==> Parameters: admin(String), 8c8f13c0-3852-11eb-a44c-005056b431aa(String)
+2020-12-07 14:12:16,661 DEBUG er.ext.ExtApiTestReportMapper.list_COUNT: 143 - <==      Total: 1

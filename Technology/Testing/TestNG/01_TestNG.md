@@ -1,0 +1,5 @@
+- [TestNG Complete Bootcamp For Beginners - Novice To Ninja](https://learning.oreilly.com/videos/testng-complete-bootcamp/9781789132557/9781789132557-video1_1)
+- https://testng.org/doc/index.html
+- https://testng.org/doc/documentation-main.html#running-testng
+- https://www.tutorialspoint.com/testng/index.htm
+- https://www.yiibai.com/html/testng/2013/0914294.html
