@@ -55,82 +55,6 @@ advertised.listeners=PLAINTEXT://192.168.163.41:9092
 ### ldap登入
 略
 
-### API Keys 
-
-1.  有效期30分钟。src/main/java/io/metersphere/security/ApiKeyHandler.java
-
-```java
-	// 签名验证
-    public static String getUser(String accessKey, String signature) {
-        if (StringUtils.isBlank(accessKey) || StringUtils.isBlank(signature)) {
-            return null;
-        }
-        UserKey userKey = CommonBeanFactory.getBean(UserKeyService.class).getUserKey(accessKey);
-        if (userKey == null) {
-            throw new RuntimeException("invalid accessKey");
-        }
-        String signatureDecrypt;
-        try {
-            signatureDecrypt = CodingUtil.aesDecrypt(signature, userKey.getSecretKey(), accessKey);
-        } catch (Throwable t) {
-            throw new RuntimeException("invalid signature");
-        }
-        String[] signatureArray = StringUtils.split(StringUtils.trimToNull(signatureDecrypt), "|");
-        if (signatureArray.length < 2) {
-            throw new RuntimeException("invalid signature");
-        }
-        if (!StringUtils.equals(accessKey, signatureArray[0])) {
-            throw new RuntimeException("invalid signature");
-        }
-        long signatureTime;
-        try {
-            signatureTime = Long.parseLong(signatureArray[signatureArray.length - 1]);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        if (Math.abs(System.currentTimeMillis() - signatureTime) > 1800000) {
-            //签名30分钟超时
-            throw new RuntimeException("expired signature");
-        }
-        return userKey.getUserId();
-    }
-```
-
-2.  使用个人API Key 进行接口交互校验
-
-    ```java
-    import org.apache.commons.codec.binary.Base64;
-    import javax.crypto.Cipher;
-    import javax.crypto.spec.IvParameterSpec;
-    import javax.crypto.spec.SecretKeySpec;
-    
-    String accessKey = "${accessKey}";
-    String secretKey = "${secretKey}";
-    
-    public static String aesEncrypt(String src, String secretKey, String iv) throws Exception {
-        byte[] raw = secretKey.getBytes("UTF-8");
-        SecretKeySpec secretKeySpec = new SecretKeySpec(raw, "AES");
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        IvParameterSpec iv1 = new IvParameterSpec(iv.getBytes());
-        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, iv1);
-        byte[] encrypted = cipher.doFinal(src.getBytes("UTF-8"));
-        return Base64.encodeBase64String(encrypted);
-    }
-    
-    try {
-        //调用加密算法生成签名
-        String signature = aesEncrypt(accessKey + "|" + System.currentTimeMillis(), secretKey, accessKey);
-        //将签名值存入 signature 变量中
-        vars.put("signature",signature);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    ```
-
-    
-
-    
-
 ### 普通新用户登入系统
 1. src/main/java/io/metersphere/controller/LoginController.java
 ```java
@@ -293,23 +217,95 @@ src/main/java/io/metersphere/security/ShiroDBRealm.java
 
 
 
+### 使用API Keys 进行接口之间的交互
 
+1.  有效期30分钟。src/main/java/io/metersphere/security/ApiKeyHandler.java
+
+```java
+	// 签名验证
+    public static String getUser(String accessKey, String signature) {
+        if (StringUtils.isBlank(accessKey) || StringUtils.isBlank(signature)) {
+            return null;
+        }
+        UserKey userKey = CommonBeanFactory.getBean(UserKeyService.class).getUserKey(accessKey);
+        if (userKey == null) {
+            throw new RuntimeException("invalid accessKey");
+        }
+        String signatureDecrypt;
+        try {
+            signatureDecrypt = CodingUtil.aesDecrypt(signature, userKey.getSecretKey(), accessKey);
+        } catch (Throwable t) {
+            throw new RuntimeException("invalid signature");
+        }
+        String[] signatureArray = StringUtils.split(StringUtils.trimToNull(signatureDecrypt), "|");
+        if (signatureArray.length < 2) {
+            throw new RuntimeException("invalid signature");
+        }
+        if (!StringUtils.equals(accessKey, signatureArray[0])) {
+            throw new RuntimeException("invalid signature");
+        }
+        long signatureTime;
+        try {
+            signatureTime = Long.parseLong(signatureArray[signatureArray.length - 1]);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        if (Math.abs(System.currentTimeMillis() - signatureTime) > 1800000) {
+            //签名30分钟超时
+            throw new RuntimeException("expired signature");
+        }
+        return userKey.getUserId();
+    }
+```
+
+2.  使用个人API Key 进行接口交互校验
+
+    ```java
+    import org.apache.commons.codec.binary.Base64;
+    import javax.crypto.Cipher;
+    import javax.crypto.spec.IvParameterSpec;
+    import javax.crypto.spec.SecretKeySpec;
+    
+    String accessKey = "${accessKey}";
+    String secretKey = "${secretKey}";
+    
+    public static String aesEncrypt(String src, String secretKey, String iv) throws Exception {
+        byte[] raw = secretKey.getBytes("UTF-8");
+        SecretKeySpec secretKeySpec = new SecretKeySpec(raw, "AES");
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        IvParameterSpec iv1 = new IvParameterSpec(iv.getBytes());
+        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, iv1);
+        byte[] encrypted = cipher.doFinal(src.getBytes("UTF-8"));
+        return Base64.encodeBase64String(encrypted);
+    }
+    
+    try {
+        //调用加密算法生成签名
+        String signature = aesEncrypt(accessKey + "|" + System.currentTimeMillis(), secretKey, accessKey);
+        //将签名值存入 signature 变量中
+        vars.put("signature",signature);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    ```
+
+    
 
 
 ## FQA
 
-### JMeter 函数没有解析
+### 为什么JMeter 函数没有被解析执行
 - 本地使用spring运行起来环境之后，JMeter函数没有解析成功。（已解决，系统读取jmeter.home 失败导致）src/main/java/io/metersphere/api/jmeter/JMeterService.java 
 
-### 修改服务的配置文件
+### 如何修改服务的配置文件
 - vim /opt/metersphere/.env
 
 ### 如何添加节点（非windows机器）
-1. 方式1：使用官方一键部署，修改install.conf中MS_MODE=node-controller，如需要修改端口修改配置MS_NODE_CONTROLLER_PORT=8082，修改万之后在资源池添加这台机器的ip和端口即可。
+1. 方式1：使用官方一键部署，修改install.conf中MS_MODE=node-controller，如需要修改端口修改配置MS_NODE_CONTROLLER_PORT=8082，修改完之后在资源池添加这台机器的ip和端口即可。
 2. 方式2：直接单独部署jar文件，指定配置文件路径即可，需要机器有docker环境。
 
 
-### MeterSphere Windows开发环境搭建
+### 如何在 Windows 上搭建开发环境
 
 1. 源码下载，导入idea。
 2. 修改 src\main\java\io\metersphere\Application.java 中加载的配置文件.@PropertySource(value = {"file:c:\\opt\\metersphere\\conf\\metersphere.properties"}, encoding = "UTF-8", ignoreResourceNotFound = true)

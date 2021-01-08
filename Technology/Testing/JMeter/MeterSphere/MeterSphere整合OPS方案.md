@@ -12,6 +12,8 @@
 - 分为两类：涉及到用户新增、工作空间新增、修改工作空间时使用admin的帐号用API Keys进行OPS与MS交互。其余操作使用当前登入的用户id进行操作，比如新增项目、查看接口列表、执行测试、查看报告、添加用例等。
 - 用户数据迁移：第一次要批量将OPS目前现在存在用户调用MS接口循环创建一次，否则可能会出现用户关联工作空间时找不到用户的情况。可以使用postman循环创建所有用户。
 - 接口返回值统一说明：{"success": true},  true表示成功,false失败。
+- 默认组织id、默认工作空间ID、角色ID：系统初始化会创建可以写死全局值，其他值根据实际情况传入。
+- 接口数据符号说明：{{}}里面的值为动态生成
 ### 交互流程
 1. OPS用户登入后使用OPS的user.name + 统一密码Autotest#123调用MS登入接口“/signin”判断用户是否存在,如果不存在则使用Admin的API Keys 调用新增用户接口“/user/special/add”，创建一个“只读用户、默认工作空间”的用户。
 
@@ -26,9 +28,9 @@
 - 用户_新增-只读用户-默认工作空间： POST {{URL}}/user/special/add
 ```java
 {
-    "id": "dd.shan8",
-    "name": "dd.shan8",
-    "email": "dd.shan8@.com",
+    "id": "{{id}}",
+    "name": "{{name}}",
+    "email": "{{email}}",
     "phone": "15606690056",
     "password": "Autotest#123",
     "roles": [
@@ -51,14 +53,12 @@
             "id": "8c8f13c0-3852-11eb-a44c-005056b431aa",
             "organizationId": "8c8ecd5b-3852-11eb-a44c-005056b431aa",
             "name": "默认工作空间",
-            "description": "系统默认创建的工作空间",
-            "createTime": 1607321276000,
-            "updateTime": 1607321276000
+            "description": "系统默认创建的工作空间"
         }
     ]
 }
 ```
-- 返回值："success": true 或 false
+- 说明：roles.ides=工作空间ID。orgList.id=组织ID。wsList.id=工作空间ID。wsList.oranizationId=组织Id
 
 2.  OPS用户创建项目时使用Admin的API Keys 调用MS接口“/workspace/special/add” 主动创建MS的工作空间，并将工作空间Id保存到OPS库中的third_ms表中。
 
@@ -67,8 +67,8 @@
         ```java
         {
             "organizationId": "8c8ecd5b-3852-11eb-a44c-005056b431aa",
-            "name": "OPS工作空间-名称不能重复1",
-            "description": "工作空间描述"
+            "name": "{{name}}",
+            "description": "{{name}}"
         }
         ```
 
@@ -89,12 +89,12 @@
         ```java
         {
             "userIds": [
-                "dd.shan8"
+                "dd.shan8","dd.shan7","动态传入"
             ],
             "roleIds": [
                 "test_manager"
             ],
-            "workspaceId": "adff05ea-5f79-4123-9736-77fc4b61dc06"
+            "workspaceId": "adff05ea-5f79-4123-9736-77fc4b61dc06动态传入"
         }
         ```
 
@@ -106,8 +106,8 @@
 
         ```java
         {
-            "id": "e4bdb1a9-2282-4f52-848f-266b611ef7ab",
-            "name": "API-空间1234",
+            "id": "e4bdb1a9-2282-4f52-848f-266b611ef7ab动态传入",
+            "name": "更新之后的值动态传入",
             "organizationId": "8c8ecd5b-3852-11eb-a44c-005056b431aa"
         }
         ```
