@@ -5,12 +5,14 @@
 2. 软件安装目录：/usr/local
 3. 
 ## 常用命令
-1. 查看系统版本：cat /etc/redhat-release 
-2. 下载命令:wget http://xxxx.tar.gz
-3. 安装软件：yum install 软件名称
-4. 后台运行程序：nohup java -jar XXX.jar >>Log.log 2>&1 &
-5. 文件传输工具：yum install lrzsz
-6. 测试端口是否通:nc 192.168.163.41 3306
+1. 配置yum下载源：https://developer.aliyun.com/article/704987 
+2. 查看系统版本：cat /etc/redhat-release 
+3. 下载命令:wget http://xxxx.tar.gz
+4. 安装软件：yum install 软件名称
+5. 后台运行程序：nohup java -jar XXX.jar >>Log.log 2>&1 &
+6. 文件传输工具：yum install lrzsz
+7. 测试端口是否通:nc 192.168.163.41 3306
+8. 远程拷贝：scp -r /home/administrator/test/ root@192.168.1.100:/root/
 
 ## 快捷键
 1. Ctrl + Alt + 方向键取消方法

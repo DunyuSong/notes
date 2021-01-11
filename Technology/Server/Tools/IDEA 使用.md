@@ -1,5 +1,5 @@
 # IDEA 配置
-- 破解：https://tech.souyunku.com/?p=15076
+- 破解(pycharm也可用)：https://tech.souyunku.com/?p=15076
 ## 快捷键
 - Ctrl + Alt + L 格式化代码
 - Shift + Shift  搜索类、资源、配置项、方法等
