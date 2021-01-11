@@ -33,7 +33,7 @@ advertised.listeners=PLAINTEXT://192.168.163.41:9092
 ## Online Eenvionment
 ### DataBase mysql 5.7.26
 - 192.168.9.31, root:autotest#123
-- 
+- lib name: metersphere
 ### Front
 - 192.168.9.32, root:autotest#123
 - 
@@ -45,7 +45,8 @@ advertised.listeners=PLAINTEXT://192.168.163.41:9092
     - 16G
 - 192.168.9.35, root:autotest#123
     - 16G
-- 192.168.9.36
+- 192.168.9.36, root:autotest#123
+    - 16G
 - 192.168.9.37
 - 192.168.9.38
 - 192.168.9.39
