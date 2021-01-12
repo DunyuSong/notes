@@ -43,11 +43,11 @@ advertised.listeners=PLAINTEXT://192.168.163.41:9092
 ### Node-Controller
 - 192.168.9.34, root:autotest#123
     - 16G
-- 192.168.9.35, root:autotest#123
-    - 16G
+- 192.168.9.35
 - 192.168.9.36, root:autotest#123
     - 16G
-- 192.168.9.37
+- 192.168.9.37, root:autotest#123
+    - 16G
 - 192.168.9.38
 - 192.168.9.39
 - 192.168.9.40
