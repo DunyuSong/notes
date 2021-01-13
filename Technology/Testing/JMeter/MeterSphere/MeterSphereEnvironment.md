@@ -3,10 +3,12 @@
 
 1. [访问地址](http://192.168.163.41:8081/login)
 2. 登入帐号密码：admin:metersphere
-3. 机器：192.168.163.41; root:autotest#123; 
-4. 安装方式：一键安装，全docker。模式：allinone，主副一体。
-5. 安装目录:/opt
-6. 接口文档: http://localhost:8081/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
+3. Server：192.168.163.41; root:autotest#123; 
+4. Node:  192.168.163.51
+5. DataBase mysql 5.7.26: 192.168.163.43, root:autotest#123,name: metersphere_dev
+6. 安装方式：一键安装，全docker。模式：server
+7. 安装目录:/opt
+8. 接口文档: http://localhost:8081/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
 
 ## Local Development Environment
 
@@ -14,7 +16,7 @@
 2.  本地开发环境CentOS 7。 安装JMeter5.3(拷贝里面所有文件到/opt/jmeter目录下，并且用代码工程中的src/main/resources/jmeter/bin下的配置文件覆盖下载的JMeter配置文件/opt/jmeter/bin
     )
 3.  服务器CentOS  7(192.168.163.41): 在 /usr/local 搭建了 JDK 1.8、、kafka_2.13-2.6.0、zookeeper-3.6.2、maven-3.6.3、docker、jenkins-2.263
-4.  数据库192.168.163.43: 搭建了MySQL 5.7。创建了数据库metersphere_dev
+4.  数据库192.168.163.43: 搭建了MySQL 5.7。数据库metersphere_dev
 5.  在服务器上创建Topic
 ```shell
 创建2个topic
