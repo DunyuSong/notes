@@ -13,6 +13,7 @@
 6. 文件传输工具：yum install lrzsz
 7. 测试端口是否通:nc 192.168.163.41 3306
 8. 远程拷贝：scp -r /home/administrator/test/ root@192.168.1.100:/root/
+9. 查看端口被那个程序占用: netstat -lnp|grep 8081
 
 ## 快捷键
 1. Ctrl + Alt + 方向键取消方法

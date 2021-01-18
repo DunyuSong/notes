@@ -86,7 +86,7 @@
 
     -   工作空间_添加成员到此工作空间：POST {{URL}}/user/special/ws/member/add
 
-        ```java
+        ```json
         {
             "userIds": [
                 "dd.shan8","dd.shan7","动态传入"
@@ -97,12 +97,14 @@
             "workspaceId": "adff05ea-5f79-4123-9736-77fc4b61dc06动态传入"
         }
         ```
+	- 工作空间_删除成员从指定工作空间：GET {{URL}}/user/special/ws/member/delete/:workspaceId/:userId
+
 
 4.  OPS项目删除、项目名称修改时需要同步调用MS的Admin Keys 进行更新，并写更新third_ms表中的子段值。
 
     -   工作空间_删除： GET  {{URL}}/workspace/special/delete/:workspaceId
 
-    -   工作空间_更新：POST {{URL}}/workspace/special/update
+    -   工作空间名称_更新：POST {{URL}}/workspace/special/update
 
         ```java
         {
@@ -111,8 +113,6 @@
             "organizationId": "8c8ecd5b-3852-11eb-a44c-005056b431aa"
         }
         ```
-
-        
 
 5.  OPS点击接口测试后使用OPS中user.name+默认密码进行登入MS,拿到MS返回的Cookies值，保存下来。然后通过third.ms表查询出此项目的workspaceId，在调用切换工作空间接口“{{URL}}/user/switch/source/ws/{workspaceId}“之后开始加载接口测试页面。
 
