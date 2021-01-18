@@ -4,11 +4,12 @@
 1. [访问地址](http://192.168.163.41:8081/login)
 2. 登入帐号密码：admin:metersphere
 3. Server：192.168.163.41; root:autotest#123; 
-4. Node:  192.168.163.51
-5. DataBase mysql 5.7.26: 192.168.163.43, root:autotest#123,name: metersphere_dev
-6. 安装方式：一键安装，全docker。模式：server
-7. 安装目录:/opt
-8. 接口文档: http://localhost:8081/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
+4. Front：192.168.163.42；root:autotest#123; 
+5. Node:  192.168.163.51；root:autotest#123; 
+6. DataBase: 192.168.163.43( mysql 5.7.26), root:autotest#123,name: metersphere_dev
+7. 安装方式：一键安装，全docker。模式：server,node-controller
+8. 安装目录:/opt
+9. 接口文档: http://localhost:8081/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
 
 ## Local Development Environment
 
