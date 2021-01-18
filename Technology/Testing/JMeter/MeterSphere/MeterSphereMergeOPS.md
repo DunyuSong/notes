@@ -336,7 +336,138 @@
 	]
 }
 ```
+
+## 部署方式
+### Front
+1. 前端可单独构建部署，使用nginx。
+
+2. 配置如下：
+
+   ```
+   user root root;
+   worker_processes 6;
+   
+   error_log  /data/nginx_log/error.log  crit;
+   
+   
+   events {
+       use  epoll;
+       worker_connections  65535;
+   }
+   
+   
+   http {
+       include       mime.types;
+       default_type  application/octet-stream;
+       log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                     '$status $body_bytes_sent "$http_referer" '
+                     '"$http_user_agent" "$http_x_forwarded_for"';
+       access_log   /data/nginx_log/access.log  main;
+   
+       charset  utf-8;
+       server_names_hash_bucket_size 128;
+       client_header_buffer_size 32k;
+       large_client_header_buffers 4 32k;
+   
+       sendfile       on;
+       tcp_nopush     on;
+       tcp_nodelay    on;
+       keepalive_timeout  60;
+   
+       upstream ms_server {
+       #ip_hash;
+       server   192.168.163.41:8081  max_fails=2 fail_timeout=30s;
+       }
+   
+       server {
+   
+       server_names_hash_bucket_size 128;
+       client_header_buffer_size 32k;
+       large_client_header_buffers 4 32k;
+   
+       sendfile       on;
+       tcp_nopush     on;
+       tcp_nodelay    on;
+       keepalive_timeout  60;
+   
+       upstream ms_server {
+       #ip_hash;
+       server   192.168.163.41:8081  max_fails=2 fail_timeout=30s;
+       }
+   
+       server {
+           listen       80;
+           server_name  ms.xxx.com;
+           index  index.html index.htm;
+           #root   /data/www;
+   
+            location / {
+               add_header 'Access-Control-Allow-Credentials' 'true';
+               add_header 'Access-Control-Allow-Origin' '*';
+               add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+               add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+   
+               add_header Last-Modified $date_gmt;
+               add_header Cache-Control no-cache;
+               expires -1;
+               root /data/meter;
+               index  index.html index.htm;
+               #try_files $uri $uri/ /index.html ;
+               #error_page 404 /index.html;
+           }
+           location ~ /(meter|performance|api|socket) {
+               proxy_http_version 1.1;
+               proxy_set_header Host  $host;
+               proxy_set_header X-Real-Ip $remote_addr;
+               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+               proxy_set_header X-Nginx-Proxy true;
+               #proxy_redirect off;
+               client_max_body_size 10m;
+               rewrite ^/meter/(.*)$ /$1 break;
+               proxy_pass http://ms_server;
+               # websocket
+               proxy_set_header Upgrade $http_upgrade;
+               proxy_set_header Connection "upgrade";
+               proxy_connect_timeout 300s;
+               proxy_read_timeout 300s;
+               proxy_send_timeout 300s;
+               add_header 'Access-Control-Allow-Origin' '*';
+               add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, projectid';
+               add_header 'Access-Control-Allow-Methods' 'POST, GET, PUT, DELETE, OPTIONS';
+           }
+           # websocket
+           location = /meter/signin {
+           #rewrite ^/signin http://192.168.173.134:9032/v1/project/abcd;
+               proxy_pass http://192.168.9.82:9032/v1/project/signin;
+               proxy_set_header Host $host;
+               proxy_set_header X-Real-IP $remote_addr;
+               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+               add_header 'Access-Control-Allow-Origin' '*';
+               add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, projectid';
+               add_header 'Access-Control-Allow-Methods' 'POST, GET, PUT, DELETE, OPTIONS';
+   
+       }
+   }
+   }
+   
+   ```
+
+   
+### Server
+1. 使用docker容器替换方案，首先将修改的代码使用maven打包成jar包。执行:mvn clean package
+
+2. 修改容器的jar包名称：
+
+   ```bash
+   docker exec -it 1711dc027b05 /bin/sh
+   mv /opt/apps/backend-1.6.jar /opt/apps/backend-1.6.jar.backup
+   exit
+   docker cp  /tmp/backend-1.6.jar 1711dc027b05:/opt/apps/backend-1.6.jar
+   ```
+3. 重启服务：msctl restart
+
 ## 疑问
+
 1. MS的登入如果开启配置文件中的run.mode=local则不需要做密码验证。暂不清楚是否有其他影响。
 2. MS登入成功之后与系统的交互是保存的在cookie中的，那OPS如何拿到cookie与MS进行API的交互呢？
 3. 
