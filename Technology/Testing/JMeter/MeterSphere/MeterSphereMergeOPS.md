@@ -122,7 +122,7 @@
 - OPS中的接口信息导入到MS中的接口定义，格式为Postman Collection V2.1格式结构，参数如下格式：
 - 格式说明：
   - 支持json、form-data两种格式，text、file暂不做兼容。
-  - 一个json文件表示一个接口集，其中item数组中保存了每个接口所需要的信息，event节点为脚本暂不做支持。**需要注意：节点为数组[]的时候需要将全部值导入。**
+  - 一个json文件表示一个接口集(对应OPS中是模块)，其中item数组中保存了每个接口所需要的信息，event节点为脚本暂不做支持。**需要注意：节点为数组[]的时候需要将全部值导入。**
 - **处理规则1**：从OPS中读取数据时如果值为“${function_name(arg1, arg2)}"时，需要做处理，将括号及里面参数去掉，比如去掉"(arg1, arg2)"，因为MS不支持方法的调用，只能将方法处理的结果值作为变量存储在运行期间，然后通过变量名称来获取值。例如：vars.put("username", getUserName) 。
 - **处理规则2**：从OPS中读取的数据值如果为"$variableName"则修改为"${variableName}",添加一对花括号将变量名称括起来。
 - 
@@ -222,11 +222,21 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Content-Type2",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\":\"sys.sw\",\n\t\"password\":\"RWh55E/9ZKCd4Sg8RsgdfbOaek7Ym3Fv7vjna0u7e/6l7WEh64bcvAEtZt+/tOzaTXgZYCnxIKwCxaSyDWg8qL7Cylv6xoTD3tkxOpCz5/KdPczsFltxDaKQ9AGsGnGOoHDwS7c7xFvowcMZv+LsAyMSUWQke/TzW/4ojdTUDgw=\",\n\t\"remember\":true\n}"
+					"raw": "{\n\t\"username\":\"sys.sw\",\n\t\"password\":\"RWh55E/9ZKCd4Sg8RsgdfbOaek7Ym3Fv7vjna0u7e/6l7WEh64bcvAEtZt+/tOzaTXgZYCnxIKwCxaSyDWg8qL7Cylv6xoTD3tkxOpCz5/KdPczsFltxDaKQ9AGsGnGOoHDwS7c7xFvowcMZv+LsAyMSUWQke/TzW/4ojdTUDgw=\",\n\t\"remember\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "/files/upload.htm?siteId=$siteId&memberId=$memberId&directory=$directory&file=$file&time=$time&sign=${get_sign()}&signVersion=$signVersion",
