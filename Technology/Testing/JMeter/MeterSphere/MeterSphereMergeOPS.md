@@ -120,7 +120,12 @@
 
 ## 接口信息导入
 - OPS中的接口信息导入到MS中的接口定义，格式为Postman Collection V2.1格式结构，参数如下格式：
-- 格式说明：支持json、form-data两种格式，text、file暂不做兼容。item数组中保存了每个接口所需要的信息，event节点为脚本暂不做支持。**需要注意：节点为数组[]的时候需要将全部值导入**
+- 格式说明：
+  - 支持json、form-data两种格式，text、file暂不做兼容。
+  - 一个json文件表示一个接口集，其中item数组中保存了每个接口所需要的信息，event节点为脚本暂不做支持。**需要注意：节点为数组[]的时候需要将全部值导入。**
+- **处理规则1**：从OPS中读取数据时如果值为“${function_name(arg1, arg2)}"时，需要做处理，将括号及里面参数去掉，比如去掉"(arg1, arg2)"，因为MS不支持方法的调用，只能将方法处理的结果值作为变量存储在运行期间，然后通过变量名称来获取值。例如：vars.put("username", getUserName) 。
+- **处理规则2**：从OPS中读取的数据值如果为"$variableName"则修改为"${variableName}",添加一对花括号将变量名称括起来。
+- 
 ```json
 {
 	"info": {
@@ -339,120 +344,136 @@
 
 ## 部署方式
 ### Front
-1. 前端可单独构建部署，使用nginx。
+1. 前端需要与源站点部署到同一台机器环境下，为了能共享Cookies，这样在源网站设置的Cookies在iFrame中可以直接拿到。
+2. /meter/signin匹配的接口调用ops后端的登入，然后ops后端登入调用ms的登入并且setCookies。
+3. ~ /(meter|performance|api|socket)匹配的接口直接调用后端api接口地址http://192.168.9.33:8081 。
+4. 配置内容如下：
 
-2. 配置如下：
+```
+user root root;
+worker_processes 6;
 
-   ```
-   user root root;
-   worker_processes 6;
-   
-   error_log  /data/nginx_log/error.log  crit;
-   
-   
-   events {
-       use  epoll;
-       worker_connections  65535;
-   }
-   
-   
-   http {
-       include       mime.types;
-       default_type  application/octet-stream;
-       log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                     '$status $body_bytes_sent "$http_referer" '
-                     '"$http_user_agent" "$http_x_forwarded_for"';
-       access_log   /data/nginx_log/access.log  main;
-   
-       charset  utf-8;
-       server_names_hash_bucket_size 128;
-       client_header_buffer_size 32k;
-       large_client_header_buffers 4 32k;
-   
-       sendfile       on;
-       tcp_nopush     on;
-       tcp_nodelay    on;
-       keepalive_timeout  60;
-   
-       upstream ms_server {
-       #ip_hash;
-       server   192.168.163.41:8081  max_fails=2 fail_timeout=30s;
-       }
-   
-       server {
-   
-       server_names_hash_bucket_size 128;
-       client_header_buffer_size 32k;
-       large_client_header_buffers 4 32k;
-   
-       sendfile       on;
-       tcp_nopush     on;
-       tcp_nodelay    on;
-       keepalive_timeout  60;
-   
-       upstream ms_server {
-       #ip_hash;
-       server   192.168.163.41:8081  max_fails=2 fail_timeout=30s;
-       }
-   
-       server {
-           listen       80;
-           server_name  ms.xxx.com;
-           index  index.html index.htm;
-           #root   /data/www;
-   
-            location / {
-               add_header 'Access-Control-Allow-Credentials' 'true';
-               add_header 'Access-Control-Allow-Origin' '*';
-               add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-               add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
-   
-               add_header Last-Modified $date_gmt;
-               add_header Cache-Control no-cache;
-               expires -1;
-               root /data/meter;
-               index  index.html index.htm;
-               #try_files $uri $uri/ /index.html ;
-               #error_page 404 /index.html;
-           }
-           location ~ /(meter|performance|api|socket) {
-               proxy_http_version 1.1;
-               proxy_set_header Host  $host;
-               proxy_set_header X-Real-Ip $remote_addr;
-               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-               proxy_set_header X-Nginx-Proxy true;
-               #proxy_redirect off;
-               client_max_body_size 10m;
-               rewrite ^/meter/(.*)$ /$1 break;
-               proxy_pass http://ms_server;
-               # websocket
-               proxy_set_header Upgrade $http_upgrade;
-               proxy_set_header Connection "upgrade";
-               proxy_connect_timeout 300s;
-               proxy_read_timeout 300s;
-               proxy_send_timeout 300s;
-               add_header 'Access-Control-Allow-Origin' '*';
-               add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, projectid';
-               add_header 'Access-Control-Allow-Methods' 'POST, GET, PUT, DELETE, OPTIONS';
-           }
-           # websocket
-           location = /meter/signin {
-           #rewrite ^/signin http://192.168.173.134:9032/v1/project/abcd;
-               proxy_pass http://192.168.9.82:9032/v1/project/signin;
-               proxy_set_header Host $host;
-               proxy_set_header X-Real-IP $remote_addr;
-               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-               add_header 'Access-Control-Allow-Origin' '*';
-               add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, projectid';
-               add_header 'Access-Control-Allow-Methods' 'POST, GET, PUT, DELETE, OPTIONS';
-   
-       }
-   }
-   }
-   
-   ```
+error_log  /data/nginx_log/error.log  crit;
 
-   
+
+events {
+    use  epoll;
+    worker_connections  65535;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                  '$status $body_bytes_sent "$http_referer" '
+                  '"$http_user_agent" "$http_x_forwarded_for"';
+    access_log   /data/nginx_log/access.log  main;
+
+    charset  utf-8;
+    server_names_hash_bucket_size 128;
+    client_header_buffer_size 32k;
+    large_client_header_buffers 4 32k;
+
+    sendfile       on;
+    tcp_nopush     on;
+    tcp_nodelay    on;
+    keepalive_timeout  60;
+
+    upstream web_server {
+    #ip_hash;
+    server   127.0.0.1:8080  max_fails=2 fail_timeout=30s;
+    }
+
+    server {
+        listen       80;
+        server_name  ops.xx这里自己改下xx.com;
+        index  index.html index.htm;
+        root   /data/www;
+
+        location ~^/api {
+        proxy_next_upstream     http_502 http_504 error timeout invalid_header;
+        proxy_pass              http://web_server;
+        proxy_set_header        Host            $host;
+        proxy_set_header        X-Real-IP       $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"';
+        break;
+        }
+        location / {
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+
+            add_header Last-Modified $date_gmt;
+            add_header Cache-Control no-cache;
+            expires -1;
+            root /data/app/;
+            index  index.html index.htm;
+            try_files $uri $uri/ /index.html;
+            error_page 404 /index.html;
+            break;
+        }
+      }
+      server {
+        listen       8081;
+        server_name  ops.xx这里自己改下xx.com;
+        index  index.html index.htm;
+        #root   /data/www;
+
+         location / {
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+
+            add_header Last-Modified $date_gmt;
+            add_header Cache-Control no-cache;
+            expires -1;
+            root /data/meter;
+            index  index.html index.htm;
+            #try_files $uri $uri/ /index.html ;
+            #error_page 404 /index.html;
+        }
+        location ~ /(meter|performance|api|socket) {
+            proxy_http_version 1.1;
+            proxy_set_header Host  $host;
+            proxy_set_header X-Real-Ip $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Nginx-Proxy true;
+            #proxy_redirect off;
+            client_max_body_size 10m;
+            rewrite ^/meter/(.*)$ /$1 break;
+            proxy_pass http://192.168.9.33:8081;
+            # websocket
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_connect_timeout 300s;
+            proxy_read_timeout 300s;
+            proxy_send_timeout 300s;
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, projectid';
+            add_header 'Access-Control-Allow-Methods' 'POST, GET, PUT, DELETE, OPTIONS';
+        }
+        # websocket
+        location = /meter/signin {
+        	#rewrite ^/signin http://192.168.173.134:9032/v1/project/abcd;
+            proxy_pass http://192.168.9.80/v1/project/signin;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, projectid';
+            add_header 'Access-Control-Allow-Methods' 'POST, GET, PUT, DELETE, OPTIONS';
+        }
+
+    }
+}
+
+```
+
+
 ### Server
 1. 使用docker容器替换方案，首先将修改的代码使用maven打包成jar包。执行:mvn clean package
 
