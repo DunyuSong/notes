@@ -6,14 +6,34 @@
 3. 
 ## 常用命令
 1. 配置yum下载源：https://developer.aliyun.com/article/704987 
+
 2. 查看系统版本：cat /etc/redhat-release 
-3. 下载命令:wget http://xxxx.tar.gz
+
+3. 下载命令:wget http://xxxx.tar.gz  或者 curl -O http://xxx.tar.gz
+
 4. 安装软件：yum install 软件名称
+
 5. 后台运行程序：nohup java -jar XXX.jar >>Log.log 2>&1 &
+
 6. 文件传输工具：yum install lrzsz
+
 7. 测试端口是否通:nc 192.168.163.41 3306
+
 8. 远程拷贝：scp -r /home/administrator/test/ root@192.168.1.100:/root/
+
 9. 查看端口被那个程序占用: netstat -lnp|grep 8081
+
+10.  解压缩文件到指定目录：tar -xzvf /opt/test.tgz -C /usr/local/
+
+11. curl命令：用于模拟http请求
+
+    ```shell
+    # 下载文件,支持断点续传
+    > curl -C -O http://www.baidu.com
+    
+    ```
+
+    
 
 ## 快捷键
 1. Ctrl + Alt + 方向键取消方法
@@ -59,7 +79,7 @@ cd /usr/local
 mkdir maven
 scp /usr/local/src /usr/local/maven
 cd /usr/local/maven
-tar -xzvf tar -zxvf apache-maven-3.6.3-bin.tar.gz
+tar -xzvf apache-maven-3.6.3-bin.tar.gz
 ```
 2. 配置环境变量
 1. vim /etc/profile
@@ -69,8 +89,21 @@ tar -xzvf tar -zxvf apache-maven-3.6.3-bin.tar.gz
 MAVEN_HOME=/usr/local/maven/apache-maven-3.6.3
 export PATH=${MAVEN_HOME}/bin:${PATH}
 ```
-3.使刚刚配置的环境变量生效: source /etc/profile
-4. 验证是否安装成功：mvn –v
+5.  使刚刚配置的环境变量生效: source /etc/profile
+
+6.  验证是否安装成功：mvn –v
+
+7.  如果出现 "JAVA_HOME environment variable is not defined correctly",则可能因为电脑安装的时jre而不是jdk导致的。
+
+```shell
+    [root@localhost apache-maven-3.6.3]# source /etc/profile
+    [root@localhost apache-maven-3.6.3]# mvn -v
+    The JAVA_HOME environment variable is not defined correctly
+    This environment variable is needed to run this program
+    NB: JAVA_HOME should point to a JDK not a JRE    
+```
+
+​    
 
 ### Zookeeper and KafKa install
 - [参考文档](https://www.w3cschool.cn/apache_kafka/apache_kafka_installation_steps.html)
@@ -154,6 +187,7 @@ https://www.prado.lt/5-minute-upgrade-nginx-1-12-to-1-17-on-centos-7-rhel-7
 
 ### 开启SFTP服务
 1、修改配置文件：vim /etc/ssh/sshd_config
+
 ```
 ##下面这行注释掉
 #Subsystem sftp /usr/libexec/openssh/sftp-server
@@ -162,5 +196,13 @@ Subsystem sftp internal-sftp
 ```
 2、重启sshd服务:service sshd restart
 
+### Git
 
+1.  局域网拉去公司仓库代码出现错误：Peer's certificate issuer has been marked as not trusted by the user。需要修改
 
+    ```shell
+    vi /etc/profile
+    export GIT_SSL_NO_VERIFY=1  
+    sourece /etc/profile 
+    ```
+    
