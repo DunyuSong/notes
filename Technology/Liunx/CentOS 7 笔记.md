@@ -25,7 +25,9 @@
 
 10.  解压缩文件到指定目录：tar -xzvf /opt/test.tgz -C /usr/local/
 
-11. curl命令：用于模拟http请求
+11.  修改主机名称：hostnamectl set-hostname myCentos
+
+12. curl命令：用于模拟http请求
 
     ```shell
     # 下载文件,支持断点续传
