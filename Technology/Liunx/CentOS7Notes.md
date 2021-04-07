@@ -175,6 +175,22 @@ tar -xzvf kafka_2.13-2.7.0.tgz -C /usr/local/kafka/
 2. 启动服务: bin/kafka-server-start.sh config/server.properties 
 3. 停止服务：bin/kafka-server-stop.sh config/server.properties
 
+### Kafka Manager install
+
+1.  使用docker安装，不建议源码安装，比较麻烦。
+
+```shell
+docker pull sheepkiller/kafka-manager
+docker run -d --name kfk-manager --restart always -p 9000:9000 -e ZK_HOSTS=这里换成你的ZK服务IP:2181 sheepkiller/kafka-manager
+
+```
+
+2.  启动后通过地址访问：<你的manager运行地址>:9000
+
+3.  需要手动配置你要管理的kafka节点
+
+    ![KafkaManager配置](CentOS7Notes.assets/KafkaManager配置.png)
+
 ### Jenkins install
 - 参考：https://www.cnblogs.com/stulzq/p/9291237.html
 
