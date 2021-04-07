@@ -1,4 +1,4 @@
-# CentOS 7 笔记
+# CentOS 7 Notes
 - [系统安装参考](https://blog.csdn.net/qq_39135287/article/details/83993574)
 ## 目录介绍
 1. 软件源码包下载目录: /usr/local/src
@@ -137,7 +137,16 @@ $ JMX enabled by default
 $ Using config: /Users/../zookeeper-3.4.6/bin/../conf/zoo.cfg
 $ Starting zookeeper ... STARTED
 ```
-4. 启动CLI:bin/zkCli.sh
+4. 查看服务是否启动成功：
+
+    ```shell
+    sudo netstat -anp | grep 2181
+    sh bin/zkServer.sh status
+    ```
+
+    >   如果报错：Client port found: 2181. Client address: localhost. Client SSL: false.可能是由于本机8080端口被占用。可以修改zoo.cfg文件添加未被占用的端口“admin.serverPort=18080，如果还是无法启动把clientPort也改一下clientPort=2182：”。如果修改了zookeeper的地址安装kafka的时候server.propertise对应的也需要修改zookeeper.connect=localhost:2182
+
+5. 启动CLI:bin/zkCli.sh
 - 输入上面的命令后，您将被连接到zookeeper服务器，并将获得以下响应。
 ```
 Connecting to localhost:2181
@@ -160,8 +169,8 @@ WatchedEvent state:SyncConnected type: None path:null
 cd /usr/local
 mkdir kafka
 cd /usr/local/src
-wget wget https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
-tar -xzvf kafka_2.13-2.6.0.tgz -C /usr/local/kafka/
+wge https://mirrors.bfsu.edu.cn/apache/kafka/2.7.0/kafka_2.13-2.7.0.tgz
+tar -xzvf kafka_2.13-2.7.0.tgz -C /usr/local/kafka/
 ```
 2. 启动服务: bin/kafka-server-start.sh config/server.properties 
 3. 停止服务：bin/kafka-server-stop.sh config/server.properties
@@ -184,10 +193,30 @@ tar -xzvf kafka_2.13-2.6.0.tgz -C /usr/local/kafka/
 2. sudo systemctl stop nginx
 3. sudo systemctl restart nginx
 4. sudo systemctl status nginx
+
+#### nginx 配置
+1. vim /etc/nginx/nginx.conf
+2. 
+#### nginx 日志
+1. 访问日志:tail -f  /var/log/nginx/access.log 
 #### nginx 更新
 https://www.prado.lt/5-minute-upgrade-nginx-1-12-to-1-17-on-centos-7-rhel-7 
 
+### Nodejs install
+
+1.  添加yum仓库：
+2.  Install Node.js and npm
+```shell
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+sudo yum install nodejs
+
+```
+
+3.  验证node是否安装成功：node --version
+4.  验证npm是否安装成功：npm --version
+
 ### 开启SFTP服务
+
 1、修改配置文件：vim /etc/ssh/sshd_config
 
 ```
