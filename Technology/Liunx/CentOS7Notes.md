@@ -182,7 +182,7 @@ tar -xzvf kafka_2.13-2.7.0.tgz -C /usr/local/kafka/
 - 参考：https://www.cnblogs.com/xiujin/p/11477419.html
 
 
-### nginx 安装
+### Install Nginx
 1. sudo yum update
 2. sudo yum install epel-release
 3. sudo yum install nginx
@@ -215,7 +215,7 @@ sudo yum install nodejs
 3.  验证node是否安装成功：node --version
 4.  验证npm是否安装成功：npm --version
 
-### 开启SFTP服务
+### Enable SFTP
 
 1、修改配置文件：vim /etc/ssh/sshd_config
 
