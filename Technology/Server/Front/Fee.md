@@ -7,7 +7,7 @@
 ### 系统环境
 -   CentOS 7
 -   JDK 11：yum install java-11-openjdk-devel -y 
-### 安装 Redis-4.0、Memcache-1.5、MongoDB-4.0、Adminer-latest、MySQL-5.7
+### Install Redis-4.0、Memcache-1.5、MongoDB-4.0、Adminer-latest、MySQL-5.7
 1. mkdir -p ~/www/fee-docker
 2. cd ~/www/fee-docker/
 3. git clone https://github.com/alphawq/Fee-dev-docker.git ~/www/fee-docker
@@ -257,7 +257,7 @@ npm run dev
 -   整体流程
 -   ![打点服务整体流程](Fee.assets/打点服务整体流程.png)
 
-### Nginx 安装配置
+### Nginx Config
 
 1.  安装nginx参考文档：[InstallNginx](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#install-nginx)
 
@@ -378,7 +378,7 @@ vi /etc/nginx/html/index.html
 10.  访问nginx：http://192.168.9.51/dig.gif?a=1
 11.  查看日志：tail -f /var/log/nginx/ferms/*.log
 
-### SDK测试
+### Test SDK 
 
 1.  修改sdk下打点服务器地址：
 
@@ -484,7 +484,7 @@ vim testFee.html
 </html>
 ```
 
-### 安装Zookeeper、Kafka
+### Install Zookeeper、Kafka
 
 1.  参考文档：[Zookeeper and KafKa install](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#zookeeper-and-kafka-install)
 
@@ -653,11 +653,11 @@ vim testFee.html
         ./kafka-console-producer.sh --broker-list 192.168.9.51:9092 --topic fee
         ```
 
-### 安装Kafka Manage 
+### Install Kafka Manage 
 
 -   参考文档:[KafkaMangerInstall](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#kafka-manager-install)
 
-### Filebeat install
+### Install Filebeat 
 
 1.  Filebeat会作为producer将nginx产生的日志作为消息发送到kafka
 2.  下载: sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
@@ -943,8 +943,10 @@ type=rpm-md
 
     7.  会收到filebeat生产的文件，此时访问上面fee里写的网页，触发发送给打点服务器产生日志，filebeat生产消息，kafka拿到消息给消费者，这部分就完成了。
 
+### Rsyslog
 
-### rsyslog相关
+-   Rsyslog 日志系统的全称是 rocket-fast system for log，它提供了高性能，高安全功能和模块化设计。rsyslog能够接受从各种各样的来源，将其输入，输出的结果到不同的目的地。rsyslog可以提供超过每秒一百万条消息给目标文件。
+
 >    rsyslog对 kafka的支持是v8.7.0版本后才提供的支持
 >
 >    1.  运行下列命令:
