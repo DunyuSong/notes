@@ -484,9 +484,11 @@ vim testFee.html
 </html>
 ```
 
-### Install Zookeeper、Kafka
+### Install Zookeeper、Kafka、Kafka-Manage
 
-1.  参考文档：[Zookeeper and KafKa install](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#zookeeper-and-kafka-install)
+>   Zookeeper, Kafka, Kfka-Manage 也可以选择通过docker安装。参考文档：[docker-compose-kafka-zookeeper-and-kafka-manager](https://gist.github.com/alphawq/1c2dc14cbc303e32ec45c64e2d764284#docker-compose-kafka-zookeeper-and-kafka-manager)
+
+1.  安装Zookeeper和Kafka：[Zookeeper and KafKa install](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#zookeeper-and-kafka-install)
 
 2.  Kafka配置文件添加监听的IP（由于我修改了Zookepper端口，所以这里我将Zookeeper端口也修改为2182）：vim /usr/local/kafka/kafka_2.13-2.7.0/config/server.properties
 
@@ -633,7 +635,7 @@ vim testFee.html
     
     ```
 
-    3.  开启Kafka服务
+3.  开启Kafka服务
 
     ```shell
     cd /usr/local/kafka/kafka_2.13-2.7.0/
@@ -641,21 +643,19 @@ vim testFee.html
     
     ```
 
-    4.  开始消费
+    -   开始消费
 
-        ```shell
-        ./kafka-console-consumer.sh --bootstrap-server 192.168.9.51:9092 --topic fee --from-beginning
-        ```
+    ```shell
+    ./kafka-console-consumer.sh --bootstrap-server 192.168.9.51:9092 --topic fee --from-beginning
+    ```
 
-    5.  开始生产。新开一个窗口
+    -   开始生产。新开一个窗口
 
-        ```shell
-        ./kafka-console-producer.sh --broker-list 192.168.9.51:9092 --topic fee
-        ```
+    ```shell
+    ./kafka-console-producer.sh --broker-list 192.168.9.51:9092 --topic fee
+    ```
 
-### Install Kafka Manage 
-
--   参考文档:[KafkaMangerInstall](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#kafka-manager-install)
+4.  安装 Kafka Manage: [KafkaMangerInstall](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#kafka-manager-install)
 
 ### Install Filebeat 
 
@@ -928,28 +928,29 @@ type=rpm-md
     
     ```
 
-    6.  启动服务
+6.  启动服务
 
-        ```shell
-        # 启动
-        systemctl start filebeat.service
-        # 开机启动
-        systemctl enable filebeat.service
-        # 状态
-        systemctl status filebeat.service
-        # 停止
-        systemctl stop filebeat.service
-        ```
+    ```shell
+    # 启动
+    systemctl start filebeat.service
+    # 开机启动
+    systemctl enable filebeat.service
+    # 状态
+    systemctl status filebeat.service
+    # 停止
+    systemctl stop filebeat.service
+    ```
 
-    7.  会收到filebeat生产的文件，此时访问上面fee里写的网页，触发发送给打点服务器产生日志，filebeat生产消息，kafka拿到消息给消费者，这部分就完成了。
+7.  会收到filebeat生产的文件，此时访问上面fee里写的网页，触发发送给打点服务器产生日志，filebeat生产消息，kafka拿到消息给消费者，这部分就完成了。
 
 ### Rsyslog
 
 -   Rsyslog 日志系统的全称是 rocket-fast system for log，它提供了高性能，高安全功能和模块化设计。rsyslog能够接受从各种各样的来源，将其输入，输出的结果到不同的目的地。rsyslog可以提供超过每秒一百万条消息给目标文件。
 
 >    rsyslog对 kafka的支持是v8.7.0版本后才提供的支持
->
->    1.  运行下列命令:
+
+1.  运行下列命令:
+
 ```
 yum install rsyslog
 yum install rsyslog-kafka.x86_64
@@ -1071,12 +1072,16 @@ local7.*                                                /var/log/boot.log
 ```
 
 3.  配置说明
-    1.  `localhost:9092` 需要修改为你自己的kafka地址（如果为集群多个地址逗号分隔）
-    2.  `/var/log/nginx/ferms/*.log` 是监控的nginx日志文件
-    3.  `topic: fee`后续通过 `kafka-manager` 查看
+
+    -   `localhost:9092` 需要修改为你自己的kafka地址（如果为集群多个地址逗号分隔）
+
+    -   `/var/log/nginx/ferms/*.log` 是监控的nginx日志文件
+
+    -   `topic: fee`后续通过 `kafka-manager` 查看
 
 4.  修改完配置后运行： `rsyslogd -N 1` 或者 `rsyslogd -dn` 查看配置是否报错
-5.  然后重启 `rsyslog` --`service rsyslog restart` 重启后查看 `/var/log/message` 中日志是否报错。
+
+5.  然后重启 rsyslog：`service rsyslog restart` 重启后查看 `/var/log/message` 中日志是否报错。
 
 ### 修改项目的kafka配置
 

@@ -131,6 +131,12 @@ from(bucket: v.bucket)
 
 
 
+## FAQ
+### Influxdb如何修改密码
+1. 官网：https://docs.influxdata.com/influxdb/v2.0/users/change-password/
+2. 终端输入:influx user password -n 用户名
+3. 终端会提示让你输入两次新密码。
+
 ## 参考资料
 
 >   https://portal.influxdata.com/downloads/ 
