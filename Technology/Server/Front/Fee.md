@@ -973,7 +973,7 @@ ruleset(name="nginx-kafka") {
     action (
         type="omkafka"
 	    template="nginxAccessTemplate"
-        topic="fee-test"
+        topic="fee"
         broker="localhost:9092"
     )
 }
@@ -1071,7 +1071,7 @@ local7.*                                                /var/log/boot.log
 3.  配置说明
     1.  `localhost:9092` 需要修改为你自己的kafka地址（如果为集群多个地址逗号分隔）
     2.  `/var/log/nginx/ferms/*.log` 是监控的nginx日志文件
-    3.  `topic: fee-test`后续通过 `kafka-manager` 创建
+    3.  `topic: fee`后续通过 `kafka-manager` 查看
 
 4.  修改完配置后运行： `rsyslogd -N 1` 或者 `rsyslogd -dn` 查看配置是否报错
 5.  然后重启 `rsyslog` --`service rsyslog restart` 重启后查看 `/var/log/message` 中日志是否报错。
