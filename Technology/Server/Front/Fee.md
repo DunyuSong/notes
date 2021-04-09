@@ -250,7 +250,7 @@ npm run dev
 
     ![Elasticsearch：chrome](Fee.assets/Elasticsearch：chrome.png)
 
-    5.  
+    
 
 ### 打点服务搭建
 
@@ -648,6 +648,14 @@ vim testFee.html
     ```shell
     ./kafka-console-consumer.sh --bootstrap-server 192.168.9.51:9092 --topic fee --from-beginning
     ```
+
+    -   [可选项]可以把这个fee topic放到后台运行，否则终端关闭后就自动断开了.这里我把实时数据输出到了topic_fee.log是为了方便看数据格式，如果数据比较多需要自己定时清除日志。
+
+        ```shell
+        nohup ./kafka-console-consumer.sh --bootstrap-server 192.168.9.51:9092 --topic fee --from-beginning >>topic_fee.log 2>&1 &
+        ```
+
+        
 
     -   开始生产。新开一个窗口
 
