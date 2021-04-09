@@ -284,8 +284,7 @@ npm run dev
         include       /etc/nginx/mime.types;
         default_type  application/octet-stream;
     
-        log_format ferms '$time_iso8601     -       -       $remote_addr    $http_host      $status $request_time   $request_length $body_bytes_sent        15d04347-be16-b9ab-0029-24e4b6645950   -       -       9689c3ea-5155-2df7-a719-e90d2dedeb2c 937ba755-116a-18e6-0735-312cba23b00c       -       -       $request_uri    -       $http_user_agent        -       sample=-&_UC_agent=-&device_id=-&-      -       -       -';
-    
+        log_format ferms '$time_local       -       -       $remote_addr    $http_host      $status $request_time   $request_length $body_bytes_sent        15d04347-be16-b9ab-0029-24e4b6645950    -       -       9689c3ea-5155-2df7-a719-e90d2dedeb2c    937ba755-116a-18e6-0735-312cba23b00c    -       -       $request_uri    -       $http_user_agent        -       sample=-&_UC_agent=-&device_id=-&-      -       -       -'
         access_log  /var/log/nginx/access.log  ferms;
     
         sendfile           on;
@@ -303,6 +302,7 @@ npm run dev
                 set $day $3;
                 set $hour $4;
                 set $minute $5;
+    
             }
             access_log /var/log/nginx/ferms/$year$month-$day-$hour-$minute.log ferms;
     
@@ -315,7 +315,7 @@ npm run dev
         }
     }
     ```
-
+    
 3.  创建html
 
 ```
@@ -657,7 +657,198 @@ vim testFee.html
 
 4.  安装 Kafka Manage: [KafkaMangerInstall](https://github.com/miller-shan/notes/blob/master/Technology/Liunx/CentOS7Notes.md#kafka-manager-install)
 
-### Install Filebeat 
+### Rsyslog
+
+-   Rsyslog 日志系统的全称是 rocket-fast system for log，它提供了高性能，高安全功能和模块化设计。rsyslog能够接受从各种各样的来源，将其输入，输出的结果到不同的目的地。rsyslog可以提供超过每秒一百万条消息给目标文件。这里主要是用Rsyslog系统将nginx日志输送到kafka。
+
+>    rsyslog对 kafka的支持是v8.7.0版本后才提供的支持
+
+1.  安装Rsyslog:
+
+```
+yum install rsyslog
+yum install rsyslog-kafka.x86_64
+```
+安装完成后查看 `/usr/lib64/rysylog/)` 中是否存在 `omkafka.so` ,验证 `rsyslog-kafka` 是否安装成功
+
+2. Rsyslog配置,编辑配置文件vim /etc/rsyslog.conf，在配置文件 `#### MODULES ####` 的下面添加如下配置
+
+```conf
+# rsyslog configuration file
+
+# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
+# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
+
+#### MODULES ####
+module(load="omkafka")
+module(load="imfile")
+# nginx template
+# template(name="nginxAccessTemplate" type="string" string="%hostname%<-+>%syslogtag%<-+>%msg%\n")
+template(name="nginxAccessTemplate" type="string" string="%msg%\n")
+# ruleset
+ruleset(name="nginx-kafka") {
+     #日志转发kafka
+    action (
+        type="omkafka"
+	template="nginxAccessTemplate"
+        topic="fee"
+        broker="192.168.9.51:9092"
+    )
+}
+# 定义消息来源及设置相关的action
+input(type="imfile" Tag="nginx-accesslog" File="/var/log/nginx/ferms/*.log" Ruleset="nginx-kafka")
+
+# The imjournal module bellow is now used as a message source instead of imuxsock.
+$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
+$ModLoad imjournal # provides access to the systemd journal
+#$ModLoad imklog # reads kernel messages (the same are read from journald)
+#$ModLoad immark  # provides --MARK-- message capability
+
+# Provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides TCP syslog reception
+#$ModLoad imtcp
+#$InputTCPServerRun 514
+
+
+#### GLOBAL DIRECTIVES ####
+
+# Where to place auxiliary files
+$WorkDirectory /var/lib/rsyslog
+
+# Use default timestamp format
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# File syncing capability is disabled by default. This feature is usually not required,
+# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+# Include all config files in /etc/rsyslog.d/
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+# Turn off message reception via local log socket;
+# local messages are retrieved through imjournal now.
+$OmitLocalLogging on
+
+# File to store the position in the journal
+$IMJournalStateFile imjournal.state
+
+
+#### RULES ####
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages!
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+# The authpriv file has restricted access.
+authpriv.*                                              /var/log/secure
+
+# Log all the mail messages in one place.
+mail.*                                                  -/var/log/maillog
+
+
+# Log cron stuff
+cron.*                                                  /var/log/cron
+
+# Everybody gets emergency messages
+*.emerg                                                 :omusrmsg:*
+
+# Save news errors of level crit and higher in a special file.
+uucp,news.crit                                          /var/log/spooler
+
+# Save boot messages also to boot.log
+local7.*                                                /var/log/boot.log
+
+
+# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+#$ActionQueueType LinkedList   # run asynchronously
+#$ActionResumeRetryCount -1    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+#*.* @@remote-host:514
+# ### end of the forwarding rule ###
+```
+
+3.  配置说明
+
+    -   `localhost:9092` 需要修改为你自己的kafka地址（如果为集群多个地址逗号分隔）
+
+    -   `/var/log/nginx/ferms/*.log` 是监控的nginx日志文件
+
+    -   `topic: fee`后续通过 `kafka-manager` 查看
+
+4.  修改完配置后运行： `rsyslogd -N 1` 或者 `rsyslogd -dn` 查看配置是否报错
+
+5.  重启 rsyslog：`systemctl restart rsyslog` 
+
+6.  查看 `less /var/log/message` 中日志是否报错。
+
+7.  查看Rsylog运行状态：`systemctl status rsyslog`  ,看到Active: active (running)  表示运行成功。
+
+    ![rsyslog_status](Fee.assets/rsyslog_status.png)
+    
+    
+
+#### 验证SDK打点数据正确性
+
+1.  模拟打点：访问测试页面 http://192.168.9.51/testFee.html
+
+2.  查看nginx日志： tail -f /var/log/nginx/ferms/*.log 
+
+3.  查看kafka数据：
+
+    ![数据流测试](Fee.assets/%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B5%8B%E8%AF%95.png)
+
+### 修改项目的kafka配置
+
+1.  修改kafka配置如下：`src/configs/kafka.js`
+
+    ```js
+    cd ~/www/fee/server
+    vim src/configs/kafka.js
+    const production = {
+        'group.id':'fee-dig-www-log',
+        'metadata.broker.list':'192.168.9.51:9092'
+    }
+    ```
+
+2.  客户端订阅消息,修改parseKafkaLog.js文件中57行
+
+    ```shell
+    cd ~/www/fee/server
+    vim src/commands/save_log/parseKafkaLog.js
+    
+    ```
+
+    ```js
+     57     client.on('ready', () => {
+     58       client.subscribe(['fee', 'fee-dig-www-log'])
+     59       client.consume()
+     60       this.log(`[pid:${pid}]kafka 链接成功, 开始录入数据`)
+    ```
+
+3.  开启消费任务 `npm run fee SaveLog:Kafka`
+
+4.  Done！
+
+### Install Filebeat [可选]
+
+>   Filebeat和 Rsyslog 功能相同，如果上面Rsyslog已经安装成功，那这里就不需要安装Filebeat了。
 
 1.  Filebeat会作为producer将nginx产生的日志作为消息发送到kafka
 2.  下载: sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
@@ -942,175 +1133,3 @@ type=rpm-md
     ```
 
 7.  会收到filebeat生产的文件，此时访问上面fee里写的网页，触发发送给打点服务器产生日志，filebeat生产消息，kafka拿到消息给消费者，这部分就完成了。
-
-### Rsyslog
-
--   Rsyslog 日志系统的全称是 rocket-fast system for log，它提供了高性能，高安全功能和模块化设计。rsyslog能够接受从各种各样的来源，将其输入，输出的结果到不同的目的地。rsyslog可以提供超过每秒一百万条消息给目标文件。
-
->    rsyslog对 kafka的支持是v8.7.0版本后才提供的支持
-
-1.  运行下列命令:
-
-```
-yum install rsyslog
-yum install rsyslog-kafka.x86_64
-```
-安装完成后查看 `/lib64/rysylog/)` 中是否存在 `omkafka.so` ,验证 `rsyslog-kafka` 是否安装成功
-
-2. rsyslog配置,编辑配置文件vim /etc/rsyslog.conf，在配置文件 `#### MODULES ####` 的下面添加如下配置
-
-```conf
-# rsyslog configuration file
-
-# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
-# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
-
-#### MODULES ####
-module(load="omkafka")
-module(load="imfile")
-# nginx template
-template(name="nginxAccessTemplate" type="string" string="%hostname%<-+>%syslogtag%<-+>%msg%\n")
-# ruleset
-ruleset(name="nginx-kafka") {
-     #日志转发kafka
-    action (
-        type="omkafka"
-	    template="nginxAccessTemplate"
-        topic="fee"
-        broker="localhost:9092"
-    )
-}
-# 定义消息来源及设置相关的action
-input(type="imfile" Tag="nginx-accesslog" File="/var/log/nginx/ferms/*.log" Ruleset="nginx-kafka")
-
-
-# The imjournal module bellow is now used as a message source instead of imuxsock.
-$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
-$ModLoad imjournal # provides access to the systemd journal
-#$ModLoad imklog # reads kernel messages (the same are read from journald)
-#$ModLoad immark  # provides --MARK-- message capability
-
-# Provides UDP syslog reception
-#$ModLoad imudp
-#$UDPServerRun 514
-
-# Provides TCP syslog reception
-#$ModLoad imtcp
-#$InputTCPServerRun 514
-
-
-#### GLOBAL DIRECTIVES ####
-
-# Where to place auxiliary files
-$WorkDirectory /var/lib/rsyslog
-
-# Use default timestamp format
-$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
-
-# File syncing capability is disabled by default. This feature is usually not required,
-# not useful and an extreme performance hit
-#$ActionFileEnableSync on
-
-# Include all config files in /etc/rsyslog.d/
-$IncludeConfig /etc/rsyslog.d/*.conf
-
-# Turn off message reception via local log socket;
-# local messages are retrieved through imjournal now.
-$OmitLocalLogging on
-
-# File to store the position in the journal
-$IMJournalStateFile imjournal.state
-
-
-#### RULES ####
-
-# Log all kernel messages to the console.
-# Logging much else clutters up the screen.
-#kern.*                                                 /dev/console
-
-# Log anything (except mail) of level info or higher.
-# Don't log private authentication messages!
-*.info;mail.none;authpriv.none;cron.none                /var/log/messages
-
-# The authpriv file has restricted access.
-authpriv.*                                              /var/log/secure
-
-# Log all the mail messages in one place.
-mail.*                                                  -/var/log/maillog
-
-
-# Log cron stuff
-cron.*                                                  /var/log/cron
-
-# Everybody gets emergency messages
-*.emerg                                                 :omusrmsg:*
-
-# Save news errors of level crit and higher in a special file.
-uucp,news.crit                                          /var/log/spooler
-
-# Save boot messages also to boot.log
-local7.*                                                /var/log/boot.log
-
-
-# ### begin forwarding rule ###
-# The statement between the begin ... end define a SINGLE forwarding
-# rule. They belong together, do NOT split them. If you create multiple
-# forwarding rules, duplicate the whole block!
-# Remote Logging (we use TCP for reliable delivery)
-#
-# An on-disk queue is created for this action. If the remote host is
-# down, messages are spooled to disk and sent when it is up again.
-#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
-#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
-#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
-#$ActionQueueType LinkedList   # run asynchronously
-#$ActionResumeRetryCount -1    # infinite retries if host is down
-# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
-#*.* @@remote-host:514
-# ### end of the forwarding rule ###
-
-```
-
-3.  配置说明
-
-    -   `localhost:9092` 需要修改为你自己的kafka地址（如果为集群多个地址逗号分隔）
-
-    -   `/var/log/nginx/ferms/*.log` 是监控的nginx日志文件
-
-    -   `topic: fee`后续通过 `kafka-manager` 查看
-
-4.  修改完配置后运行： `rsyslogd -N 1` 或者 `rsyslogd -dn` 查看配置是否报错
-
-5.  然后重启 rsyslog：`service rsyslog restart` 重启后查看 `/var/log/message` 中日志是否报错。
-
-### 修改项目的kafka配置
-
-1.  修改kafka配置如下：`src/configs/kafka.js`
-
-    ```js
-    cd ~/www/fee/server
-    vim src/configs/kafka.js
-    const production = {
-        'group.id':'fee-dig-www-log',
-        'metadata.broker.list':'192.168.9.51:9092'
-    }
-    ```
-
-2.  客户端订阅消息,修改parseKafkaLog.js文件中57行
-
-    ```shell
-    cd ~/www/fee/server
-    vim src/commands/save_log/parseKafkaLog.js
-    
-    ```
-
-    ```js
-     57     client.on('ready', () => {
-     58       client.subscribe(['fee', 'fee-dig-www-log'])
-     59       client.consume()
-     60       this.log(`[pid:${pid}]kafka 链接成功, 开始录入数据`)
-    ```
-
-3.  开启消费任务 `npm run fee SaveLog:Kafka`
-
-4.  Done！
