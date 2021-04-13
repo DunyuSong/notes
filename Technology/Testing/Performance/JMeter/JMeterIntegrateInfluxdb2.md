@@ -114,7 +114,7 @@
 
 8.  点击刚刚创建的System模板，添加一条过滤规则，根据主机名进行过滤。（不知道主机名的在命令行敲：hostname）
 
-    ![image-20210329160949302](JMeterIntegrateInfluxdb2.assets/image-20210329160949302.png)
+    ![System面板](JMeterIntegrateInfluxdb2.assets/System面板.png)
 
 ```javascript
 from(bucket: v.bucket)
@@ -128,6 +128,20 @@ from(bucket: v.bucket)
 ```
 
 9.  到此就完成了主机基本信息的监控了。
+
+## Influxdb 命令行操作
+
+### 使用influx 进行查询
+
+1. 查询制定表的数据
+
+    ```shell
+    influx query -o MillerOrg 'from(bucket:"JMeter")|>range(start:-1m)'
+    ```
+
+2. 通过界面查看sql语句.点击“Script Editor“
+
+    ![ScriptEditor](JMeterIntegrateInfluxdb2.assets/ScriptEditor.png)
 
 
 
