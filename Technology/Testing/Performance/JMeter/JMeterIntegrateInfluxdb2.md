@@ -1,8 +1,14 @@
-# JMeterIntegrateInfluxdb2
+# JMeter Integrate Influxdb2
+
+-   环境：CentOS7， JMeter 5.4.1
+-   **文章背景**：网上资料都是基于 influxdb1.x+grafana的搭建监控方案，但是关于Influxdb2资料比较少，最近正好在学习性能测试所以就记录下来，分享给大家。使用**Influxdb2 已经集成了图形界面可以无需使用grafana**。
+-   **文章目的**：一步一步教你如果使用Influxdb2 完成服务器的指标监控。
+-   **正文内容**：主要包含几个部分"官网介绍、工具安装、配置文件、基本使用、数据验证".
+-   **总结经验**：要确保电脑可以连接上"真正的互联网"。
 
 ## JMeter Install
 
-1.  建议使用JMeter5.4.1版本[JMeterDownload](https://jmeter.apache.org/download_jmeter.cgi)。
+1.  使用JMeter5.4.1版本, 下载地址:[JMeterDownload](https://jmeter.apache.org/download_jmeter.cgi)。
 
 ## Influxdb2 Install
 - Influxdb 是一个开源的分布式时序、时间和指标数据库，使用 Go 语言编写，无需外部依赖。Influxdb 有如下三大特性：
@@ -129,11 +135,11 @@ from(bucket: v.bucket)
 
 9.  到此就完成了主机基本信息的监控了。
 
-## Influxdb 命令行操作
+## Influxdb 命令行
 
 ### 使用influx 进行查询
 
-1. 查询制定表的数据
+1. 查询指定表的数据
 
     ```shell
     influx query -o MillerOrg 'from(bucket:"JMeter")|>range(start:-1m)'
@@ -151,7 +157,7 @@ from(bucket: v.bucket)
 2. 终端输入:influx user password -n 用户名
 3. 终端会提示让你输入两次新密码。
 
-## 参考资料
+## Reference
 
 >   https://portal.influxdata.com/downloads/ 
 
