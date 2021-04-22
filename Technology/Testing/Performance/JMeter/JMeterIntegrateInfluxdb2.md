@@ -73,7 +73,7 @@
 
     ![JMeter配置Influxdb](JMeterIntegrateInfluxdb2.assets/JMeter配置Influxdb.png)
 
-    -   注意：如果JMeter是5.4以前的版本可以没有Raw这个监听器，那选择"org.apache.jmeter.visualizers.backend.influxdb.InfluxDBBackendListenerClient".然后添加一个参数Add-->Name：influxdbToken， Value：MyToken。
+    -   注意：如果JMeter是5.4.1以前的版本可以没有Raw这个监听器，那选择"org.apache.jmeter.visualizers.backend.influxdb.InfluxDBBackendListenerClient".然后添加一个参数Add-->Name：influxdbToken， Value：MyToken。
 
 6. 线程组-->勾选“Loop Count Infinite”循环发送请求,点击start开始测试。JMX脚本文件可以在GitHub上下载，地址[https://github.com/miller-shan/notes/tree/master/Technology/Testing/Performance/JMeter](https://github.com/miller-shan/notes/tree/master/Technology/Testing/Performance/JMeter)
 
