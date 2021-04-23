@@ -9,5 +9,25 @@
 - 参考GitHub上的帮助文档。
 
 ### 本地项目关联远程仓库
-- https://www.jianshu.com/p/474bb5cdfa4e
+- 将本地已经存在的项目使用git来进行托管，并且提交到git仓库中
+
+    ```shell
+    git init
+    git add .
+    git commit -m "init commit"
+    
+    连接到远程仓库
+    git remote add origin 你的远程仓库地址
+    
+    获取远程仓库中的文件
+    git pull --rebase origin master
+    
+    将项目推送到远程仓库
+    git push -u origin master
+    
+    
+    ```
+
+    
+
 - 

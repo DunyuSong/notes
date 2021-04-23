@@ -276,11 +276,42 @@ Server部署在机器A，Node-Controller部署在机器B时需要修改改“系
 ### 如何在 Windows 上搭建开发环境
 
 1. 源码下载，导入idea。
+
 2. 修改 src\main\java\io\metersphere\Application.java 中加载的配置文件.@PropertySource(value = {"file:c:\\opt\\metersphere\\conf\\metersphere.properties"}, encoding = "UTF-8", ignoreResourceNotFound = true)
+
+    ```
+    # 数据库配置
+    spring.datasource.url=jdbc:mysql://192.168.163.43:3306/metersphere_dev?autoReconnect=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    spring.datasource.username=root
+    spring.datasource.password=autotest#123
+    
+    # kafka 配置，node-controller 以及 data-streaming 服务需要使用 kafka 进行测试结果的收集和处理
+    kafka.partitions=1
+    kafka.replicas=1
+    kafka.topic=JMETER_METRICS
+    kafka.test.topic=JMETER_TESTS
+    kafka.bootstrap-servers=192.168.163.41:19092
+    kafka.log.topic=JMETER_LOGS
+    
+    # node-controller 所使用的 jmeter 镜像版本 
+    #jmeter.image=registry.fit2cloud.com/metersphere/jmeter-master:0.0.6
+    jmeter.image=registry.cn-qingdao.aliyuncs.com/metersphere/jmeter-master:5.3-ms11
+    
+    # 启动模式，lcoal 表示以本地开发模式启动
+    #run.mode=local
+    
+    ```
+
+    
+
 3. 修改 src\main\resources\application.properties 中日志配置路径logging.file.path=c:/opt/metersphere/logs/${spring.application.name}
+
 4. 修改 src\main\resources\application.properties 中属性路径jmeter.home=c:/opt/jmeter
+
 5. 修改 src\main\resources\logback.xml 中属性路径 <property file="c:/opt/metersphere/conf/metersphere.properties"/>
+
 6. 下载JMeter 5.2.1版本，将JMeter所有文件拷贝到c:/opt/jmeter 目录下。MS会读取这个目录作为JMeter主目录，然后加载lib执行函数，运行测试等。
+
 7. idea 配远程docker：https://cloud.tencent.com/developer/article/1494921   https://www.cnblogs.com/hei12138/p/ideausedocker.html  
 
 ### 使用官方镜像安装时设置为使用外部数据库
