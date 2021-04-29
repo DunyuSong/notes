@@ -370,10 +370,9 @@ vi /etc/nginx/html/index.html
 8.  启动服务：
 
     ```shell
-    systemctl start nginx.service
-    systemctl enable nginx.service
+    systemctl restart nginx
     ```
-
+    
 9.  查看nginx服务是否启动： ps -e  | grep nginx 
 10.  访问nginx：http://192.168.9.51/dig.gif?a=1
 11.  查看日志：tail -f /var/log/nginx/ferms/*.log
@@ -705,6 +704,8 @@ ruleset(name="nginx-kafka") {
 }
 # 定义消息来源及设置相关的action
 input(type="imfile" Tag="nginx-accesslog" File="/var/log/nginx/ferms/*.log" Ruleset="nginx-kafka")
+# 修改文件读数量防止出现Too many open files错误
+$MaxOpenFiles 20000
 
 # The imjournal module bellow is now used as a message source instead of imuxsock.
 $ModLoad imuxsock # provides support for local system logging (e.g. via logger command)

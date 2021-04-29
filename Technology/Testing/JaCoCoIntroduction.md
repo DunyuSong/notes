@@ -12,19 +12,30 @@
 
 
 
+## FAQ
+
+- IDEA 里如何使用Jacoco进行覆盖率查看
+
+1. Run Configurations-->Modify options-->修改 Coverage settings --> Specify alternative  converage runner--> 选择 JaCoCo。
+
+2.  右键运行的时候选择“More Run/Debug”
+
+![idea-runJaCoCo](JaCoCoIntroduction.assets/idea-runJaCoCo.png)
 
 
 
 
 
 
-## 参考文档
+## Reference
 
->    https://www.open-open.com/lib/view/open1472174544246.html
->
->   https://segmentfault.com/a/1190000022259363
->
->   https://github.com/didi/super-jacoco
+- Multi Module Spring Boot集成测试使用JaCoCo生成:https://segmentfault.com/a/1190000023722057
+
+-   https://www.open-open.com/lib/view/open1472174544246.html
+
+-   https://segmentfault.com/a/1190000022259363
+
+-   https://github.com/didi/super-jacoco
 
 
 
