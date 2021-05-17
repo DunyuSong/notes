@@ -169,12 +169,12 @@ WatchedEvent state:SyncConnected type: None path:null
 cd /usr/local
 mkdir kafka
 cd /usr/local/src
-wge https://mirrors.bfsu.edu.cn/apache/kafka/2.7.0/kafka_2.13-2.7.0.tgz
+wget https://mirrors.bfsu.edu.cn/apache/kafka/2.7.0/kafka_2.13-2.7.0.tgz
 tar -xzvf kafka_2.13-2.7.0.tgz -C /usr/local/kafka/
 ```
 2. 启动服务: bin/kafka-server-start.sh config/server.properties 
 3. 停止服务：bin/kafka-server-stop.sh config/server.properties
-4. 查看kafka服务是否启动：输入”jps"，显示的有进程号代表成功。
+4. 查看kafka服务是否启动：输入”jps"，显示的有kafka进程号代表成功。
 5. 查看存在的topiic：bin/kafka-topics.sh --list --zookeeper localhost:2181
 6. 查看指定topic的内容：bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicName --from-beginning
 
