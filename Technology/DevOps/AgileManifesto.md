@@ -36,7 +36,7 @@
 ### Working software is the primary measure of progress.
 - 作的软件是进度的首要度量标准。
 
-### Agile processes promote sustainable development.The sponsors, developers, and users should be able o maintain a constant pace indefinitely.
+### Agile processes promote sustainable development. The sponsors, developers, and users should be able o maintain a constant pace indefinitely.
 - 过程倡导可持续开发。责任人、开发人员和用户要能够共同维持其步调稳定延续。
 
 ### Continuous attention to technical excellence and good design enhances agility.
