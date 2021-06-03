@@ -79,7 +79,7 @@ cd /usr/local/src/
 wget https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
 cd /usr/local
 mkdir maven
-scp /usr/local/src /usr/local/maven
+scp /usr/local/src/apache-maven-3.6.3-bin.tar.gz /usr/local/maven
 cd /usr/local/maven
 tar -xzvf apache-maven-3.6.3-bin.tar.gz
 ```
@@ -255,6 +255,46 @@ Subsystem sftp internal-sftp
     export GIT_SSL_NO_VERIFY=1  
     sourece /etc/profile 
     ```
+
+### SVN Client Install
+
+1.  添加yum源文件,vim /etc/yum.repos.d/wandisco-svn.repo
+
+    ```repo
+    [WandiscoSVN]
+    name=Wandisco SVN Repo
+    baseurl=http://opensource.wandisco.com/centos/$releasever/svn-1.8/RPMS/$basearch/
+    enabled=1
+    gpgcheck=0
+    ```
+
+2.  安装svn客户端
+
+    ```shell
+    yum remove subversion
+    yum clean all
+    安装之前在检查一下本地是否还有其他的svn相关包，比如libs
+    rpm -qa | grep subversion
+    如果有可能没卸载干净，在卸载一次
+    yum remove subversion
+    yum install subversion
+    svn --version
+    ```
+
+3.  svn 常用命令
+
+    ``` shell
+    # 检出代码，首次检出，会提示保存账号方式，选R，就是拒绝，选t，就是暂时接受，选p，就是永久接受。之后会让你输入电脑密码、svn帐号、svn密码、输入yes保存密码
+    svn checkout https://svn.xxx
+    # 
+    
+    ```
+
+    
+
+
+
+
 
 ## FAQ
 
